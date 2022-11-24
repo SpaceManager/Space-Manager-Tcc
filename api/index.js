@@ -742,6 +742,7 @@ app.post("/spaceSeach", async (req, res) => {
   }
 
   const ocupado = horariosOcupado.filter((este, i) => horariosOcupado.indexOf(este) === i);
+  console.log(`Ocupado: ${ocupado.length} e horario: ${horarios.length}`)
 
   if (ocupado.length <= horarios.length) {
     console.table(horarios)
@@ -764,7 +765,7 @@ app.post("/spaceSeach", async (req, res) => {
     console.log(horarios[hora1])
 
     const horariosVagos = []
-    horariosVagos.push(horarios[hora1])
+    // horariosVagos.push(horarios[hora1])
     for (let index = 0; index < livre.length; index++) {
       horariosVagos.push(livre[index])
     }
