@@ -5,10 +5,6 @@ const loadSpace = async () => {
     for (let index = 0; index < respSpace.length; index++) {
         document.getElementById('space').innerHTML += `<option value="${respSpace[index].espEspa}">${respSpace[index].espEspa}</option>`   
     }
-
-    
-    loadTurma()
-    loadMat()
 }
 
 
