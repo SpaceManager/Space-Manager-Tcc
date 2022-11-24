@@ -226,7 +226,22 @@ app.get("/reservas", async (req, res) => {
   await bd.sync();
 
   const reserva = await rese.findAll();
-  res.send(reserva);
+  const evoCalendarInfo = [];
+    const thisDate = "date";
+    for (let index = 0; index < reserva.length; index++) {
+      const events = {
+        id: "eventId" + reserva[index].idRes,
+        name: `${reserva[index].horaResDe} - ${reserva[index].horaResAte}`,
+        date: reserva[index].dayRes,
+        description: `Local: ${reserva[index].espaRes}`,
+        type: "event",
+      };
+      evoCalendarInfo.push(events);
+    }
+    res.send({
+      evoCalendarInfo: evoCalendarInfo,
+    });
+
 });
 
 app.post("/getreservas", async (req, res) => {

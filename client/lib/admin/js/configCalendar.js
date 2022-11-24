@@ -1,17 +1,4 @@
-$(document).ready(function () {
-  $("#calendar").evoCalendar({});
-});
 
-$("#calendar").evoCalendar({
-  theme: " ", //aqui tem que ser NULO (Vazio) para deixar Claro o CALENDÁRIO, e colocar 'Midnight Blue' para o azul.
-  language: "pt",
-  format: "MM dd, yyyy",
-  eventHeaderFormat: "dd MM, yyyy",
-  sidebarDisplayDefault: true,
-  eventDisplayDefault: true,
-
-  //Mudanças add aqui!!!!
-});
 const loadRese = async () => {
   var infoCalendarEvo = [];
   const urlParams = new URLSearchParams(window.location.search);
@@ -38,8 +25,7 @@ const loadRese = async () => {
   infoCalendarEvo = data.evoCalendarInfo;
   console.log(infoCalendarEvo);
 
-  $("#calendar").evoCalendar("addCalendarEvent", infoCalendarEvo);
-
+  
   // $('#calendar').evoCalendar('addCalendarEvent', [
   //   {
   //     id: '09nk7Ts',
@@ -57,3 +43,25 @@ const loadRese = async () => {
 
 // $('#calendar').evoCalendar('addCalendarEvent', [
 // ]);
+
+const loadCalendar = async () => {
+  const resProfSM = await fetch(`http://localhost:1313/reservas`);
+  const profSM = await resProfSM.json();
+
+  $(document).ready(function () {
+    $("#calendar").evoCalendar({});
+  });
+  
+  $("#calendar").evoCalendar({
+    theme: " ", //aqui tem que ser NULO (Vazio) para deixar Claro o CALENDÁRIO, e colocar 'Midnight Blue' para o azul.
+    language: "pt",
+    format: "MM dd, yyyy",
+    eventHeaderFormat: "dd MM, yyyy",
+    sidebarDisplayDefault: true,
+    eventDisplayDefault: true,
+    
+    //Mudanças add aqui!!!!
+  });
+
+  $("#calendar").evoCalendar("addCalendarEvent", profSM.evoCalendarInfo);
+}
