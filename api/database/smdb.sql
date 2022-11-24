@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Nov-2022 às 12:02
+-- Tempo de geração: 24-Nov-2022 às 13:07
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -165,6 +165,7 @@ CREATE TABLE `smrelacionamentoreservas` (
   `idRes` varchar(255) NOT NULL,
   `espRes` varchar(255) NOT NULL,
   `dayRes` varchar(255) NOT NULL,
+  `idUser` int(4) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -173,9 +174,15 @@ CREATE TABLE `smrelacionamentoreservas` (
 -- Extraindo dados da tabela `smrelacionamentoreservas`
 --
 
-INSERT INTO `smrelacionamentoreservas` (`idRel`, `idHora`, `idRes`, `espRes`, `dayRes`, `createdAt`, `updatedAt`) VALUES
-(15, '7:10', '7', 'Laboratório 1', 'Novembro 21, 2022', '2022-11-19 10:25:53', '2022-11-19 10:25:53'),
-(16, '8:00', '7', 'Laboratório 1', 'Novembro 21, 2022', '2022-11-19 10:25:53', '2022-11-19 10:25:53');
+INSERT INTO `smrelacionamentoreservas` (`idRel`, `idHora`, `idRes`, `espRes`, `dayRes`, `idUser`, `createdAt`, `updatedAt`) VALUES
+(1, '7:10', '1', 'Quadra', 'Novembro 25, 2022', 2, '2022-11-22 21:03:14', '2022-11-22 21:03:14'),
+(2, '8:00', '1', 'Quadra', 'Novembro 25, 2022', 2, '2022-11-22 21:03:14', '2022-11-22 21:03:14'),
+(3, '8:50', '2', 'Auditório', 'Novembro 25, 2022', 2, '2022-11-22 21:03:34', '2022-11-22 21:03:34'),
+(4, '9:40', '3', 'Quadra', 'Novembro 25, 2022', 2, '2022-11-22 21:03:59', '2022-11-22 21:03:59'),
+(5, '10:00', '4', 'Quadra', 'Novembro 25, 2022', 3, '2022-11-22 21:04:20', '2022-11-22 21:04:20'),
+(6, '7:10', '5', 'Laboratório 1', 'Novembro 25, 2022', 3, '2022-11-22 21:05:00', '2022-11-22 21:05:00'),
+(7, '8:00', '5', 'Laboratório 1', 'Novembro 25, 2022', 3, '2022-11-22 21:05:00', '2022-11-22 21:05:00'),
+(8, '8:50', '5', 'Laboratório 1', 'Novembro 25, 2022', 3, '2022-11-22 21:05:00', '2022-11-22 21:05:00');
 
 -- --------------------------------------------------------
 
@@ -229,7 +236,11 @@ CREATE TABLE `smres` (
 --
 
 INSERT INTO `smres` (`idRes`, `userRes`, `curRes`, `matRes`, `dayRes`, `horaResDe`, `horaResAte`, `espaRes`, `descriRes`, `estaRes`, `horSolicRes`, `createdAt`, `updatedAt`) VALUES
-(7, 'Gustavo Sales', '1 Informática', 'Geografia', 'Novembro 21, 2022', '7:10', '8:50', 'Laboratório 1', '.', 'yellow', '7:25:53', '2022-11-19 10:25:53', '2022-11-19 10:25:53');
+(1, 'Gustavo Sales', '1 Informática', 'Biologia', 'Novembro 25, 2022', '7:10', '8:50', 'Quadra', 'baaaaaaaaaaaah', 'yellow', '18:3:14', '2022-11-22 21:03:14', '2022-11-22 21:03:14'),
+(2, 'Gustavo Sales', '1 Informática', 'Língua Portuguesa', 'Novembro 25, 2022', '8:50', '9:40', 'Auditório', 'aaaaaaaaaaaaaaaaa', 'yellow', '18:3:34', '2022-11-22 21:03:34', '2022-11-22 21:03:34'),
+(3, 'Gustavo Sales', '2 Informática', 'Matemática', 'Novembro 25, 2022', '9:40', '10:00', 'Quadra', 'aaaaaaaaaaaaaaaaaaaaaaaa', 'yellow', '18:3:59', '2022-11-22 21:03:59', '2022-11-22 21:03:59'),
+(4, 'Gustavo', '2 Informática', 'História', 'Novembro 25, 2022', '10:00', '10:50', 'Quadra', 'aaaaaaaaaaaaaaaaaaaaaa', 'yellow', '18:4:20', '2022-11-22 21:04:20', '2022-11-22 21:04:20'),
+(5, 'Gustavo', '2 Informática', 'Biologia', 'Novembro 25, 2022', '7:10', '9:40', 'Laboratório 1', 'aaaaaaaaaaaaaaaaaaaaaaaa', 'yellow', '18:5:0', '2022-11-22 21:05:00', '2022-11-22 21:05:00');
 
 --
 -- Índices para tabelas despejadas
@@ -321,7 +332,7 @@ ALTER TABLE `smmats`
 -- AUTO_INCREMENT de tabela `smrelacionamentoreservas`
 --
 ALTER TABLE `smrelacionamentoreservas`
-  MODIFY `idRel` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idRel` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `smrelacionamentousermats`
@@ -333,7 +344,7 @@ ALTER TABLE `smrelacionamentousermats`
 -- AUTO_INCREMENT de tabela `smres`
 --
 ALTER TABLE `smres`
-  MODIFY `idRes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idRes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

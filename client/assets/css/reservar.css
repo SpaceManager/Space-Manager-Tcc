@@ -50,3 +50,10 @@ h5{
 .clear{
   display: none;
 }
+.containerDaReserva{
+  margin-top: 5px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
