@@ -832,7 +832,7 @@
       markup +=
         '<div class="calendar-events">' +
         '<div class="event-header"><p></p>' +
-        '<button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#reserveModal" id="modalBtn"><i class="bi bi-plus-circle-fill"></i></button></div>' +
+        '<button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#reserveModal" id="modalBtn" style="display: none;"><i class="bi bi-plus-circle-fill"></i></button></div>' +
         '<div class="event-list"></div>' +
         "</div>";
 
@@ -1343,14 +1343,14 @@
     var dataAtivaParse = Date.parse(_.$active.date)
     var dataInicialParse = Date.parse(_.$current.date)
 
-    if(dataAtivaParse < dataInicialParse){
-      document.querySelector('#modalBtn').style.display = "none"; 
-      document.querySelector('.modal-footer').style.display = "none"; 
-      document.querySelector('.changeRes').style.display = "none"; 
-    } else{
+    if(dataAtivaParse > dataInicialParse){
       document.querySelector('#modalBtn').style.display = "block"; 
       document.querySelector('.modal-footer').style.display = "block"; 
       document.querySelector('.changeRes').style.display = "block"; 
+    } else{
+      document.querySelector('#modalBtn').style.display = "none"; 
+      document.querySelector('.modal-footer').style.display = "none"; 
+      document.querySelector('.changeRes').style.display = "none"; 
     }
 
     // Remove active class to all
