@@ -3,6 +3,16 @@ const iptPass = document.getElementById("senha");
 const iptCap = document.getElementById("captchaI");
 var captchaV = "";
 
+//Caracteres inválidos para o rmInput
+var inputBox = document.getElementById("rm");
+var invalidChars = ["-", "+", "e", ".", ","]; //OS CARACTERES ~, ^ E AFINS TBM APARECEM, MAS NÃO CONSEGUI REMOVER ELES.
+
+inputBox.addEventListener("keydown", function (e) {
+  if (invalidChars.includes(e.key)) {
+    e.preventDefault();
+  }
+});
+
 
 // CAPTCHA SYSTEM!!
 var allV = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
