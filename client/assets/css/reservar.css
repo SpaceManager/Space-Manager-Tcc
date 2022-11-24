@@ -44,6 +44,10 @@ h5{
   align-items: center;
   justify-content: space-around;
 }
+.hora1{
+  width: 50%;
+  height: 100%;
+}
 #horaIni, #horaFim{
   width: 30%;
 }
@@ -53,6 +57,11 @@ h5{
 .containerDaReserva{
   margin-top: 5px;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.atributosReserva{
   display: flex;
   flex-direction: column;
   align-items: center;

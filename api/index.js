@@ -785,6 +785,7 @@ app.post("/spaceSeach", async (req, res) => {
       horariosVagos.push(livre[index])
     }
     console.log(horariosVagos)
+    console.table(ocupado)
 
     res.send({
       ocupados: ocupado,
