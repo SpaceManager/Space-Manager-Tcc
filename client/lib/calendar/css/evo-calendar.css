@@ -27,7 +27,7 @@ input:focus, textarea:focus, button:focus {
     position: relative;
     background-color: #fbfbfb;
     color: #5a5a5a;
-    width: 100%;
+    width: 95%;
     -webkit-box-shadow: 0 10px 50px -20px #e21d1d;
             box-shadow: 0 10px 50px -20px #e21d1d;
     margin: 0 auto;
@@ -357,7 +357,7 @@ tr.calendar-body .calendar-day .day[disabled] {
     padding-left: 5%;
     justify-content: space-between;
 }
-
+  
 .event-container:last-child.event-container::before {
     height: 30px;
     transform: translate(29px, 0);

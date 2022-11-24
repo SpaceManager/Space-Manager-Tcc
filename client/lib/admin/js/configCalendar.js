@@ -59,7 +59,7 @@ const loadCalendar = async () => {
     eventHeaderFormat: "dd MM, yyyy",
     sidebarDisplayDefault: true,
     eventDisplayDefault: true,
-    
+    todayHighlight: true,
     //Mudanças add aqui!!!!
   });
 
