@@ -460,8 +460,14 @@ app.post("/reservasdel", async (req, res) => {
       idRes: id,
     },
   });
+  const delRelacionamento = await relacionamentoReserva.findOne({
+    where: {
+      idRes: id
+    }
+  })
   if (delres) {
-    await delres.destroy().then(
+    await delres.destroy()
+    await delRelacionamento.destroy().then(
       res.send({
         mensage: "Reserva excluida com sucesso!",
       })
@@ -726,8 +732,7 @@ app.post("/spaceSeach", async (req, res) => {
   const hor = await smHora.findAll();
   const horarios = []
   const horariosOcupado = []
-  const livre = []
-
+  
   for (let index = 0; index < hor.length; index++) {
     horarios.push(hor[index].horsHora)
   }
@@ -740,66 +745,46 @@ app.post("/spaceSeach", async (req, res) => {
       dayRes: day,
     }
   })
-
+  
   for (let i = 0; i < verificarSala.length; i++) {
     horariosOcupado.push(verificarSala[i].idHora)
   }
-
+  
   const verificarProf = await relacionamentoReserva.findAll({
     where: {
       idUser: idUser,
       dayRes: day,
     }
   })
-
+  
   for (let a = 0; a < verificarProf.length; a++) {
     horariosOcupado.push(verificarProf[a].idHora)
   }
-
   const ocupado = horariosOcupado.filter((este, i) => horariosOcupado.indexOf(este) === i);
-  console.log(`Ocupado: ${ocupado.length} e horario: ${horarios.length}`)
-
-  if (ocupado.length <= horarios.length) {
-    console.table(horarios)
-    console.table(ocupado)
-    
-    const diferenca = horarios.length - ocupado.length
-    console.log(`Horarios tamanho: ${horarios.length} menos ocupado tamanho: ${ocupado.length} é igual a ${diferenca}`)
-    
-    for (let count = 0; count < diferenca; count++) {
-      ocupado.push('Livre')
+  var reservado = horarios
+  if (ocupado.length != 0) {
+    for (let index = 0; index < ocupado.length; index++) {
+      console.log(horarios.indexOf(ocupado[index]))
+      const i = horarios.indexOf(ocupado[index])
+      reservado[i] = 'OCUPADO'
     }
-    for (let index = 0; index < horarios.length; index++) {
-      if (ocupado[index] == 'Livre') {
-        livre.push(horarios[index])
-      } 
+    const livre = []
+    for (let index = 0; index < reservado.length; index++) {
+      if (reservado[index] != 'OCUPADO') {
+        livre.push(reservado[index])
+      }  
     }
-    console.table(livre)
-    console.log(horarios.indexOf(livre[0]))
-    const hora1 = horarios.indexOf(livre[0]) - 1
-    console.log(horarios[hora1])
-
-    const horariosVagos = []
-    // horariosVagos.push(horarios[hora1])
-    for (let index = 0; index < livre.length; index++) {
-      horariosVagos.push(livre[index])
-    }
-    console.log(horariosVagos)
-    console.table(ocupado)
-
     res.send({
-      ocupados: ocupado,
-      livre: horariosVagos
+      livre: livre,
+      reservado: ocupado,
+      allHoras: reservado
     })
   }
-
-  else if (ocupado.length == horarios.length) {
+  else {
     res.send({
-      mensage: 'Todos os horários para esta sala estão reservados'
+      livre: horarios
     })
   }
-
-  
 });
 
 app.post("/space", async (req, res) => {

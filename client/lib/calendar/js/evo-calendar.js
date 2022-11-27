@@ -832,7 +832,7 @@
       markup +=
         '<div class="calendar-events">' +
         '<div class="event-header"><p></p>' +
-        '<button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#reserveModal" id="modalBtn" style="display: none;"><i class="bi bi-plus-circle-fill"></i></button></div>' +
+        '<button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#reserveModal" id="modalBtn" style="display: none;" onclick="loadModal()" ><i class="bi bi-plus-circle-fill"></i></button></div>' +
         '<div class="event-list"></div>' +
         "</div>";
 

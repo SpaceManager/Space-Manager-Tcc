@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const idParam = urlParams.get("user");
 
 const saveRes = async () => {
+
   const resProfSM = await fetch(`http://localhost:1313/prof/${idParam}`);
   const profSM = await resProfSM.json();
 
@@ -41,7 +42,7 @@ const saveRes = async () => {
     horaFim: horaFim,
     timeReserva: timeReserva,
     endReserva: end,
-    idUser: idParam
+    idUser: idParam,
   };
 
   const init = {
@@ -196,3 +197,20 @@ const changeRes = async (id) => {
   alert(respSpace.mensage);
   location.reload();
 };
+
+function loadModal() {
+  document.querySelector(".modal-body-reserve").innerHTML = "";
+  document.querySelector(
+    ".modal-body-reserve"
+  ).innerHTML = `<select name="espaco" id="space">
+  <option value="espaco" style="display: none;" disabled selected>
+    Espaços
+  </option>
+</select>
+<div class="containerDaReserva">
+            
+  </div>
+`;
+  
+loadSpace()
+}

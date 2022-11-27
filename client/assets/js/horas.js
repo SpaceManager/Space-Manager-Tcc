@@ -1,3 +1,9 @@
+const aasyn = async () => {
+  const getHora = await fetch("http://localhost:1313/hora");
+  const respHora = await getHora.json();
+
+};
+aasyn();
 document.getElementById("space").addEventListener("change", async () => {
   document.querySelector(".containerDaReserva").innerHTML = "";
   document.querySelector(
@@ -31,14 +37,13 @@ document.getElementById("space").addEventListener("change", async () => {
   const getSpace = await fetch(`http://localhost:1313/spaceSeach`, init);
   const respSpace = await getSpace.json();
 
-  console.log(respSpace);
 
   const horariosL = respSpace["livre"];
-  console.log("horariosL: " + horariosL.length);
+  const horariosO = respSpace["reservado"];
+  const { allHoras } = respSpace;
 
   if (horariosL.length > 1) {
     for (let index = 0; index < horariosL.length - 1; index++) {
-      console.log("NA");
       if (horariosL[index] != null) {
         document.getElementById(
           "horaIni"
@@ -50,9 +55,11 @@ document.getElementById("space").addEventListener("change", async () => {
   }
 
   document.getElementById("horaIni").addEventListener("change", async () => {
-    const newHora = document.getElementById("horaIni").value;
+    document.getElementById("horaFim").innerHTML = ''
+    document.querySelector(
+      ".atributosReserva"
+    ).innerHTML = ''
     document.getElementById("horaFim").disabled = false;
-    loadHora2(newHora);
 
     document.querySelector(
       ".atributosReserva"
@@ -64,40 +71,61 @@ document.getElementById("space").addEventListener("change", async () => {
           
             <select name="materia" id="materia">
               <option value="espaco" style="display: none;" disabled selected>
-                Matérias
+              Matérias
               </option>
-            </select>
-          
-            <div class="descricao">
+              </select>
+              
+              <div class="descricao">
               <h5>Descrição da Reserva</h5>
-              <textarea name="" id="descri" cols="30" rows="10"></textarea>
-            </div>
-          
-            <div class="controls">
+              <textarea name="" id="descri" cols="30" rows="3"></textarea>
+              </div>
+              
+              <div class="controls">
               <button onclick="saveRes()" class="btn-reserva" >Reservar Sala</button>
-            </div>`;
+              </div>`;
 
+    const insertHora = async () => {
+      const horaFim = document.getElementById("horaFim");
+      const getHora = await fetch("http://localhost:1313/hora");
+      const respHora = await getHora.json();
+      const horarios = [];
+
+      for (let index = 0; index < respHora.length; index++) {
+        horarios.push(respHora[index].horsHora);
+      }
+      const newHora = document.getElementById("horaIni").value;
+      for (
+        let index = horarios.indexOf(newHora) + 1;
+        index < horarios.length;
+        index++
+      ) {
+        horaFim.innerHTML += `
+                    <option value="${horarios[index]}" class="horaFim${index}" style="display: none;">
+                    ${horarios[index]}
+                    </option>
+                    `;
+      }
+      const indexOF = []
+
+      for (let index = horarios.indexOf(newHora); index < allHoras.length; index++) {
+        if (document.querySelector(`.horaFim${index}`) != null) {
+          document.querySelector(`.horaFim${index}`).style.display = 'block'
+        }
+        console.log(allHoras[index])
+        console.log(horarios.indexOf(newHora))
+        console.log(allHoras[horarios[index]])
+        console.log(allHoras.indexOf(horarios[index]))
+        console.log('------------------------------')
+        indexOF.push(allHoras.indexOf(horarios[index]))
+        console.log(indexOF[index])
+        console.log('------------------------------')
+
+        if (allHoras.indexOf(horarios[index]) == (-1)) break
+      }
+    };
+
+    insertHora();
     loadTurma();
     loadMat();
   });
 });
-const loadHora2 = async (horaIni) => {
-  const getHora = await fetch("http://localhost:1313/hora");
-  const respHora = await getHora.json();
-  const theHora = [];
-  for (let index = 0; index < respHora.length; index++) {
-    theHora.push(respHora[index].horsHora);
-  }
-  insertHora(theHora.indexOf(String(horaIni)));
-};
-
-const insertHora = async (positionOfArray) => {
-  // document.getElementById('horaFim').innerHTML = ""
-  const getHora = await fetch("http://localhost:1313/hora");
-  const respHora = await getHora.json();
-  for (let i = positionOfArray + 1; i < respHora.length; i++) {
-    document.getElementById(
-      "horaFim"
-    ).innerHTML += `<option value="${respHora[i].horsHora}">${respHora[i].horsHora}</option>`;
-  }
-};

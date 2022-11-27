@@ -45,7 +45,7 @@ const authen = async () => {
       document.getElementById("userTell").innerHTML = "Telefone: " + dataProf.teleCad
       document.getElementById("userEmail").innerHTML = dataProf.emailCad
     }
-    profile().then(loadSpace())
+    profile()
     
   }
   else {
