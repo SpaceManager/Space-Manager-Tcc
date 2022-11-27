@@ -25,6 +25,12 @@ app.use(bodyParser.json());
 app.post("/authen", async (req, res) => {
   const idForUser = req.body.idUser;
   const token = req.headers["x-acess-token"];
+  const user = await Prof.findOne({
+    where: {
+      idCad: idForUser,
+    },
+  });
+  console.log(user)
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
       console.log({
@@ -41,6 +47,7 @@ app.post("/authen", async (req, res) => {
         res.send({
           mensage: "Token válido",
           userID: decoded.userID,
+          type: user.typeCad
         });
       } else {
         res.send({

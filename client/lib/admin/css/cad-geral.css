@@ -3,27 +3,11 @@ body {
   align-items: center;
   justify-content: center;
 }
-/* select,
-div {
-  width: 13%;
-  height: 40px;
-  border-radius: 7px;
-  margin: 5px;
-} */
-/* select,
-div,
-.conteudo {
-  display: none;
-} */
-/* select {
-  background-color: #dbcfcf;
-  border: 1px solid black;
-} */
-div {
+/* div {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 select{
   width: 30%;
   height: 35px;
@@ -59,6 +43,7 @@ option{
   column-gap: 1em;
   overflow-y: auto;
 }
+
 
 @media (max-width: 940px) {
   select{

@@ -1,10 +1,9 @@
 const authen = async () => {
   const token = sessionStorage.getItem("thistoken");
-  const urlParams = new URLSearchParams(window.location.search);
-  const idParam = urlParams.get('user')
+  const user = sessionStorage.getItem("Usuário");
   
   const log = {
-    idUser: idParam
+    idUser: user
   }
   const init = {
     method: "POST",
@@ -17,31 +16,23 @@ const authen = async () => {
   const responseSM = await fetch("http://localhost:1313/authen", init);
   const data = await responseSM.json();
 
+  console.log(data)
+
 
   if (data.mensage == 'Token válido') {
 
-    if (data.userID != user) {
-      alert("Usuário não autorizado")
-      location.href = 'http://gustavosalles13.atwebpages.com//Space-Manager/index.html'
+
+
+    if (data.type != 'admin') {
+      alert('Você não tem permissão para está aqui!')
+      location.href = 'http://127.0.0.1:5500/client'
     }
+
+    loadCalendar()
+    loadTable()
   }
   else {
     alert('Você não tem permissão para está aqui!')
-    location.href = 'http://gustavosalles13.atwebpages.com//Space-Manager/'
+    location.href = 'http://127.0.0.1:5500/client'
   }
 };
-
-
-function openM() {
-  let dropMenu = document.querySelector(".dropdownMenu")
-  let dropProf = document.querySelector(".dropdownMenuProf")
-  dropMenu.classList.add('show')
-  dropProf.classList.add('show')
-}
-
-function quitDrop() {
-  let dropMenu = document.querySelector(".dropdownMenu")
-  let dropProf = document.querySelector(".dropdownMenuProf")
-  dropMenu.classList.remove('show')
-  dropProf.classList.remove('show')
-}
