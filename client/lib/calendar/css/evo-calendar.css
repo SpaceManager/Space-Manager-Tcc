@@ -311,9 +311,14 @@ tr.calendar-body .calendar-day .day[disabled] {
     width: 100%;
 }
 
-i{
+.event-info > i{
     color: #f1f1f1;
     font-size: 100%;   
+}
+
+.fa-solid {
+    color: #f1f1f1;
+    font-size: 24px;
 }
 
 #eventListToggler {

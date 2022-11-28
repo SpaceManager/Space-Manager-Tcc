@@ -125,12 +125,12 @@ const cadmat = async (infoUser) => {
     for (let index = 0; index < resp.length; index++) {
       console.log(resp[index].matsMat);
       document.querySelector(".list-group").innerHTML += `
-      <li class="list-group-item"><div class="input-group mb-3">
-      <div class="input-group-text">
-        <input class="form-check-input mt-0" type="checkbox" id="mat${index}" value="${resp[index].idMat}" aria-label="Checkbox for following text input">
-      </div>
-      <input type="text" class="form-control" aria-label="Text input with checkbox" value="${resp[index].matsMat}" disabled>
-    </div>
+       <div class="input-group mb-3">
+       <div class="input-group-text">
+         <input id="checkIpt" class="form-check-input mt-0" type="checkbox" id="mat${index}" value="${resp[index].idMat}" aria-label="Checkbox for following text input">
+       </div>
+       <input type="text" class="form-control" aria-label="Text input with checkbox" value="${resp[index].matsMat}" disabled>
+     </div>    
     `;
     }
   } else {

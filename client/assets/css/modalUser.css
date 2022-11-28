@@ -1,5 +1,4 @@
 h3 {
-    margin-top: 25px;
     font-family: 'Source Sans Pro', sans-serif;
     text-align: justify;
     font-size: 20px;
@@ -26,6 +25,11 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.modal-body{
+    padding: 10px;
+    display: flex;
 }
 
 .changePass{

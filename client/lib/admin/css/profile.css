@@ -52,7 +52,9 @@ p:hover{
   text-decoration: underline;
 }
 
-
+.form-control:disabled{
+  background-color: #f6f6f6;
+}
 
 .mainContainer{
   width: 40%;
@@ -96,6 +98,31 @@ p:hover{
 .matteria i {
   margin-right: 5px;
 }
+.list-group{
+  width: 80%;
+}
+.input-group-text{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.input-group{
+  display: flex;
+  align-items: center;
+}
+
+#checkIpt{
+  margin: 0;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
 #cancelButton {
   background-color: #d36c6c;
   width: 35px;
@@ -103,9 +130,6 @@ p:hover{
   border: none;
   cursor: pointer;
   margin-left: 5px;
-}
-.list-group{
-  width: 80%;
 }
 
 #saveButton {
