@@ -36,3 +36,15 @@ const authen = async () => {
     location.href = 'http://127.0.0.1:5500/client'
   }
 };
+
+function logout() {
+  const confirma = confirm('Clique em "ok" para desconectar da sua conta.')
+
+  console.log(confirma)
+
+  if (confirma == true) {
+    sessionStorage.setItem("thistoken", "")
+  sessionStorage.setItem("Usuário", "")
+  location.href = 'http://127.0.0.1:5500/client'
+  }
+}

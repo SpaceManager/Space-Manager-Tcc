@@ -265,7 +265,8 @@ document.getElementById("space").addEventListener("change", async () => {
   const getSpace = await fetch(`http://localhost:1313/spaceSeach`, init);
   const respSpace = await getSpace.json();
 
-
+  
+  console.log(respSpace)
   const horariosL = respSpace["livre"];
   const horariosO = respSpace["reservado"];
   const { allHoras } = respSpace;
@@ -335,20 +336,23 @@ document.getElementById("space").addEventListener("change", async () => {
       }
       const indexOF = []
 
-      for (let index = horarios.indexOf(newHora); index < allHoras.length; index++) {
-        if (document.querySelector(`.horaFim${index}`) != null) {
-          document.querySelector(`.horaFim${index}`).style.display = 'block'
+      if (allHoras) {
+        for (let index = horarios.indexOf(newHora); index < allHoras.length; index++) {
+          if (document.querySelector(`.horaFim${index}`) != null) {
+            document.querySelector(`.horaFim${index}`).style.display = 'block'
+          }
+  
+          if (allHoras.indexOf(horarios[index]) == (-1)) break
         }
-        console.log(allHoras[index])
-        console.log(horarios.indexOf(newHora))
-        console.log(allHoras[horarios[index]])
-        console.log(allHoras.indexOf(horarios[index]))
-        console.log('------------------------------')
-        indexOF.push(allHoras.indexOf(horarios[index]))
-        console.log(indexOF[index])
-        console.log('------------------------------')
-
-        if (allHoras.indexOf(horarios[index]) == (-1)) break
+      }
+      else{
+        for (let index = horariosL.indexOf(newHora) + 1; index < horariosL.length; index++) {
+          horaFim.innerHTML += `
+                    <option value="${horariosL[index]}" class="horaFim${index}">
+                    ${horariosL[index]}
+                    </option>
+                    `;
+        }
       }
     };
 

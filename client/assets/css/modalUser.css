@@ -7,7 +7,6 @@ h3 {
 }
 
 h2 {
-    padding-left: 6px;
     color: #f3f3f3;
     font-size: 28px;
     text-shadow: black 0.1em 0.1em 0.2em;
@@ -21,20 +20,26 @@ p {
     margin-left: 10px;
 }
 
-.imgProfileUserDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .modal-body{
     padding: 10px;
+}
+
+.modal-footer{
+    border-top: solid 2px rgba(52, 57, 63, 0.479);
     display: flex;
+    flex-direction: row;
+}
+
+#footerUser{
+    border-top: solid 2px rgba(52, 57, 63, 0.479);
+    display: flex;
+    flex-direction: row;
 }
 
 .changePass{
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
     background-color: #e21d1d;
     border: solid black 0.13rem;
     color: #fff;
@@ -49,6 +54,7 @@ p {
 .changePasswordDiv{
     display: flex;
     justify-content: center;
+    width: 40%;
 }
 
 .modal-dialog{

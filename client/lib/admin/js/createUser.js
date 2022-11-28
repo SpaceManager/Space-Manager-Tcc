@@ -127,7 +127,7 @@ const cadmat = async (infoUser) => {
       document.querySelector(".list-group").innerHTML += `
        <div class="input-group mb-3">
        <div class="input-group-text">
-         <input id="checkIpt" class="form-check-input mt-0" type="checkbox" id="mat${index}" value="${resp[index].idMat}" aria-label="Checkbox for following text input">
+         <input id="mat${index}" class="form-check-input mt-0 checkIpt" type="checkbox" value="${resp[index].idMat}" aria-label="Checkbox for following text input">
        </div>
        <input type="text" class="form-control" aria-label="Text input with checkbox" value="${resp[index].matsMat}" disabled>
      </div>    

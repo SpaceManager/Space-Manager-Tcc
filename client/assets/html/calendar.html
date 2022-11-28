@@ -44,18 +44,20 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
           <div class="informacoesUser">
             <h3><b>Sobre:</b></h3>
             <p id="userName">$NomeUser</p>
             <p id="userRM">$RM</p>
             <p id="userTell">$Telefone</p>
             <p id="userEmail">$Email</p>
-            <div class="changePasswordDiv">
-              <button class="changePass" onclick="validation()" >Mudar Senha</button>
-            </div>
+          </div>
+        </div>
+        <div id="footerUser" class="modal-footer" style="display: flex; justify-content: space-between;">
+          <div class="changePasswordDiv">
+            <button class="changePass" onclick="validation()" >Mudar Senha</button>
           </div>
           <i id="logOut" onclick="logout()" class="fa-solid fa-right-from-bracket"></i>
+        
         </div>
       </div>
     </div>
@@ -78,9 +80,7 @@
           <p id="matReserva">$CursoReserva</p>
         </div>
 
-        <div class="changeRes">
-          
-        </div>
+        <div class="changeRes"></div>
       </div>
       <div class="modal-footer">
         

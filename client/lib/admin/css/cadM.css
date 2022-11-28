@@ -1,4 +1,5 @@
-div{
+
+.linha{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,6 +46,7 @@ header{
     display: flex;
     grid-auto-flow: column;
     overflow-y: auto;
+    justify-content: center;
 }
 #addCurso, #addMateria, #addSpace, #addHora{
     margin-bottom: 5px;

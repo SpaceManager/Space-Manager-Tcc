@@ -1347,10 +1347,13 @@
       document.querySelector('#modalBtn').style.display = "block"; 
       document.querySelector('.modal-footer').style.display = "block"; 
       document.querySelector('.changeRes').style.display = "block"; 
+      document.querySelector('#footerUser').style.display = "flex"; 
+      
     } else{
       document.querySelector('#modalBtn').style.display = "none"; 
       document.querySelector('.modal-footer').style.display = "none"; 
       document.querySelector('.changeRes').style.display = "none"; 
+      document.querySelector('#footerUser').style.display = "flex"; 
     }
 
     // Remove active class to all

@@ -7,8 +7,22 @@
   <title>Space Manager</title>
   <!-- <link rel="stylesheet" href="../css/table2.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/modal.css" />
     <link rel="stylesheet" href="../css/hamburguerIcon.css" />
@@ -46,12 +60,14 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="informacoesUser">    
-            <a href="../">Reservas</a>
-            <a href="cadastro.html">Cadastrar Professor</a>
-            <a href="cad-geral.html">Turmas, Matérias e Horários cadastrados</a>
-            <a href="turmas-e-materias.html">Cadastrar Turmas, Matérias e Horários</a>
+        <div class="informacoesUser">
+          <a href="../">Reservas</a>
+          <a href="cadastro.html">Cadastrar Professor</a>
+          <a class="currentPag" href="#" aria-disabled="true">Professores Cadastrados</a>
+          <a href="cad-geral.html">Turmas, Matérias e Horários cadastrados</a>
+          <a href="turmas-e-materias.html">Cadastrar Turmas, Matérias e Horários</a>
         </div>
+        <i id="logOut" onclick="logout()" class="fa-solid fa-right-from-bracket"></i>
       </div>
     </div>
   </div>
@@ -65,7 +81,6 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h3><b>Sobre:</b></h3>
         <div class="informacoesUser">
           <p id="userName"></p>
           <p id="userRM"></p>
@@ -93,7 +108,16 @@
 <script src="../js/professores.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+  <script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+  integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+  integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+  crossorigin="anonymous"
+></script>
 </html>
 
 <!-- 
