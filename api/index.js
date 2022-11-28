@@ -247,6 +247,7 @@ app.get("/reservas", async (req, res) => {
     }
     res.send({
       evoCalendarInfo: evoCalendarInfo,
+      reservas: reserva
     });
 
 });
@@ -268,6 +269,25 @@ app.post("/getreservas", async (req, res) => {
     res.send(reserva);
   }
 });
+
+app.post('/admget', async (req, res) => {
+  await bd.sync();
+  const {id} = req.body
+  console.log(id)
+  const reserva = await rese.findOne({
+    where: {
+      idRes: id,
+    },
+  });
+
+  if (reserva == null) {
+    res.send({
+      mensage: "Não há nenhuma reserva para essa sala ;)",
+    });
+  } else {
+    res.send(reserva);
+  }
+})
 
 app.post("/getReservasByID", async (req, res) => {
   await bd.sync();

@@ -14,6 +14,9 @@
   text-shadow: black 0.1em 0.1em 0.2em;
   font-family: 'Source Sans Pro', sans-serif;
 }
+.reservaInfo{
+  width: 80%;
+}
 
 p {
   font-family: 'Source Sans Pro', sans-serif;
@@ -26,6 +29,12 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.modal-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
 }
 a{
   color: white;

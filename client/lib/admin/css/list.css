@@ -45,8 +45,8 @@
 }
 .modal-body{
   display: flex;
-  align-items: baseline;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: start;
 }
 select{
   width: 30%;

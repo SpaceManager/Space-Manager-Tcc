@@ -968,7 +968,7 @@
     if (event_data.description)
       markup += '<p class="event-desc">' + event_data.description + "</p>";
       markup += "</div>";
-      markup += `<button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#editModal" id="modalEdit" onclick="loadDesRes(${event_data.id})" ><i class="bi bi-pencil-square"></i></button>`;
+      markup += `<button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#editModal" id="modalEdit" onclick="loadDesRes(${event_data.id})" / ><i class="bi bi-info-circle"></i></button>`;
     markup += "</div>";
     eventListEl.append(markup);
 
