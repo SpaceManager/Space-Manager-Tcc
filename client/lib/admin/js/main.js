@@ -16,13 +16,7 @@ const authen = async () => {
   const responseSM = await fetch("http://localhost:1313/authen", init);
   const data = await responseSM.json();
 
-  console.log(data)
-
-
   if (data.mensage == 'Token válido') {
-
-
-
     if (data.type != 'admin') {
       alert('Você não tem permissão para está aqui!')
       location.href = 'http://127.0.0.1:5500/client'
@@ -39,9 +33,6 @@ const authen = async () => {
 
 function logout() {
   const confirma = confirm('Clique em "ok" para desconectar da sua conta.')
-
-  console.log(confirma)
-
   if (confirma == true) {
     sessionStorage.setItem("thistoken", "")
   sessionStorage.setItem("Usuário", "")

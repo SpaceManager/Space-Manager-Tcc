@@ -2,7 +2,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const idParam = urlParams.get("user");
 
 const saveRes = async () => {
-
   const resProfSM = await fetch(`http://localhost:1313/prof/${idParam}`);
   const profSM = await resProfSM.json();
 
@@ -18,15 +17,53 @@ const saveRes = async () => {
   const theHora = [];
   const timeReserva = [];
 
-  const infos = []
-  infos.push(mat, turma, descri)
-  console.log(infos)
+  const infos = [];
+  infos.push(mat, turma, descri);
 
   if (infos.indexOf("") != -1 || infos.indexOf("espaco") != -1) {
-    alert("Por favor preencher todos os campos!")
-  }
+    alert("Por favor preencher todos os campos!");
+  } else {
+    const mesesIngles = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const mesesPortugues = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
 
-  else{
+    var formatData = "";
+
+    for (let index = 0; index < mesesIngles.length; index++) {
+      if (dateRes.includes(mesesPortugues[index]) == true) {
+        console.log(dateRes)
+        formatData = dateRes.replace(mesesPortugues[index], mesesIngles[index]);
+        console.log(formatData);
+      }
+    }
+
+    console.log(formatData)
+
     for (let index = 0; index < respHora.length; index++) {
       theHora.push(respHora[index].horsHora);
     }
@@ -38,12 +75,12 @@ const saveRes = async () => {
         timeReserva.push(theHora[i]);
       }
     }
-  
+
     const log = {
       user: profSM.namecCad,
       curso: turma,
       materia: mat,
-      data: dateRes,
+      data: formatData,
       space: space,
       descri: descri,
       state: "yellow",
@@ -53,7 +90,7 @@ const saveRes = async () => {
       endReserva: end,
       idUser: idParam,
     };
-  
+
     const init = {
       method: "POST",
       headers: {
@@ -61,7 +98,7 @@ const saveRes = async () => {
       },
       body: JSON.stringify(log),
     };
-  
+
     const responseSM = await fetch("http://localhost:1313/reservas", init);
     const data = await responseSM.json();
     alert(data.mensage);
@@ -124,7 +161,6 @@ const loadDesRes = async (eventID) => {
 
   for (let index = 0; index < respCursos.length; index++) {
     if (resp.curRes == respCursos[index].curCurs) {
-      console.log("tem uma igual");
       document.getElementById(
         "changeTurma"
       ).innerHTML += `<option value="${respCursos[index].curCurs}" selected>${respCursos[index].curCurs}</option>`;
@@ -187,7 +223,7 @@ const deleteReserva = async (id) => {
 };
 
 const changeRes = async (id) => {
-  const descri = document.getElementById("descriChange").value
+  const descri = document.getElementById("descriChange").value;
   if (descri != "") {
     const log = {
       id: id,
@@ -195,7 +231,7 @@ const changeRes = async (id) => {
       materia: document.getElementById("changeMat").value,
       descri: descri,
     };
-  
+
     const init = {
       method: "POST",
       headers: {
@@ -205,20 +241,17 @@ const changeRes = async (id) => {
     };
     const getSpace = await fetch(`http://localhost:1313/updateRes`, init);
     const respSpace = await getSpace.json();
-  
+
     alert(respSpace.mensage);
     location.reload();
-  }
-  else{
-  alert("Preencha os campos!")
+  } else {
+    alert("Preencha os campos!");
   }
 };
 
 function loadModal() {
   document.querySelector(".modal-body-reserve").innerHTML = "";
-  document.querySelector(
-    ".modal-body-reserve"
-  ).innerHTML = `
+  document.querySelector(".modal-body-reserve").innerHTML = `
   <select name="espaco" id="space">
             <option value="espaco" style="display: none;" disabled selected>
               Espaços
@@ -228,15 +261,14 @@ function loadModal() {
                       
             </div>
 `;
-  
-loadSpace()
 
-document.getElementById("space").addEventListener("change", async () => {
-  console.log("OI?")
-  document.querySelector(".containerDaReserva").innerHTML = "";
-  document.querySelector(
-    ".containerDaReserva"
-  ).innerHTML += `<div class="selectHora">
+  loadSpace();
+
+  document.getElementById("space").addEventListener("change", async () => {
+    document.querySelector(".containerDaReserva").innerHTML = "";
+    document.querySelector(
+      ".containerDaReserva"
+    ).innerHTML += `<div class="selectHora">
     <select name="" id="horaIni">
       <option value="Início" disabled selected style="display: none;">De:</option>
     </select> 
@@ -247,52 +279,48 @@ document.getElementById("space").addEventListener("change", async () => {
   <div class="atributosReserva"></div>
   `;
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const idParam = urlParams.get("user");
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get("user");
 
-  const log = {
-    room: document.getElementById("space").value,
-    day: document.querySelector(".event-header").textContent,
-    idUser: idParam,
-  };
-  const init = {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(log),
-  };
-  const getSpace = await fetch(`http://localhost:1313/spaceSeach`, init);
-  const respSpace = await getSpace.json();
+    const log = {
+      room: document.getElementById("space").value,
+      day: document.querySelector(".event-header").textContent,
+      idUser: idParam,
+    };
+    const init = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(log),
+    };
+    const getSpace = await fetch(`http://localhost:1313/spaceSeach`, init);
+    const respSpace = await getSpace.json();
 
-  
-  console.log(respSpace)
-  const horariosL = respSpace["livre"];
-  const horariosO = respSpace["reservado"];
-  const { allHoras } = respSpace;
+    const horariosL = respSpace["livre"];
+    const horariosO = respSpace["reservado"];
+    const { allHoras } = respSpace;
 
-  if (horariosL.length > 1) {
-    for (let index = 0; index < horariosL.length - 1; index++) {
-      if (horariosL[index] != null) {
-        document.getElementById(
-          "horaIni"
-        ).innerHTML += `<option value="${horariosL[index]}">${horariosL[index]}</option>`;
+    if (horariosL.length > 1) {
+      for (let index = 0; index < horariosL.length - 1; index++) {
+        if (horariosL[index] != null) {
+          document.getElementById(
+            "horaIni"
+          ).innerHTML += `<option value="${horariosL[index]}">${horariosL[index]}</option>`;
+        }
       }
+    } else {
+      alert("Todas os horários estão indisponíveis para essa sala!");
     }
-  } else {
-    alert("Todas os horários estão indisponíveis para essa sala!");
-  }
 
-  document.getElementById("horaIni").addEventListener("change", async () => {
-    document.getElementById("horaFim").innerHTML = ''
-    document.querySelector(
-      ".atributosReserva"
-    ).innerHTML = ''
-    document.getElementById("horaFim").disabled = false;
+    document.getElementById("horaIni").addEventListener("change", async () => {
+      document.getElementById("horaFim").innerHTML = "";
+      document.querySelector(".atributosReserva").innerHTML = "";
+      document.getElementById("horaFim").disabled = false;
 
-    document.querySelector(
-      ".atributosReserva"
-    ).innerHTML += `<select name="turma" id="turma">
+      document.querySelector(
+        ".atributosReserva"
+      ).innerHTML += `<select name="turma" id="turma">
               <option value="espaco" style="display: none;" disabled selected>
                 Turmas
               </option>
@@ -313,53 +341,60 @@ document.getElementById("space").addEventListener("change", async () => {
               <button onclick="saveRes()" class="btn-reserva" >Reservar Sala</button>
               </div>`;
 
-    const insertHora = async () => {
-      const horaFim = document.getElementById("horaFim");
-      const getHora = await fetch("http://localhost:1313/hora");
-      const respHora = await getHora.json();
-      const horarios = [];
+      const insertHora = async () => {
+        const horaFim = document.getElementById("horaFim");
+        const getHora = await fetch("http://localhost:1313/hora");
+        const respHora = await getHora.json();
+        const horarios = [];
 
-      for (let index = 0; index < respHora.length; index++) {
-        horarios.push(respHora[index].horsHora);
-      }
-      const newHora = document.getElementById("horaIni").value;
-      for (
-        let index = horarios.indexOf(newHora) + 1;
-        index < horarios.length;
-        index++
-      ) {
-        horaFim.innerHTML += `
+        for (let index = 0; index < respHora.length; index++) {
+          horarios.push(respHora[index].horsHora);
+        }
+        const newHora = document.getElementById("horaIni").value;
+        for (
+          let index = horarios.indexOf(newHora) + 1;
+          index < horarios.length;
+          index++
+        ) {
+          horaFim.innerHTML += `
                     <option value="${horarios[index]}" class="horaFim${index}" style="display: none;">
                     ${horarios[index]}
                     </option>
                     `;
-      }
-      const indexOF = []
-
-      if (allHoras) {
-        for (let index = horarios.indexOf(newHora); index < allHoras.length; index++) {
-          if (document.querySelector(`.horaFim${index}`) != null) {
-            document.querySelector(`.horaFim${index}`).style.display = 'block'
-          }
-  
-          if (allHoras.indexOf(horarios[index]) == (-1)) break
         }
-      }
-      else{
-        for (let index = horariosL.indexOf(newHora) + 1; index < horariosL.length; index++) {
-          horaFim.innerHTML += `
+        const indexOF = [];
+
+        if (allHoras) {
+          for (
+            let index = horarios.indexOf(newHora);
+            index < allHoras.length;
+            index++
+          ) {
+            if (document.querySelector(`.horaFim${index}`) != null) {
+              document.querySelector(`.horaFim${index}`).style.display =
+                "block";
+            }
+
+            if (allHoras.indexOf(horarios[index]) == -1) break;
+          }
+        } else {
+          for (
+            let index = horariosL.indexOf(newHora) + 1;
+            index < horariosL.length;
+            index++
+          ) {
+            horaFim.innerHTML += `
                     <option value="${horariosL[index]}" class="horaFim${index}">
                     ${horariosL[index]}
                     </option>
                     `;
+          }
         }
-      }
-    };
+      };
 
-    insertHora();
-    loadTurma();
-    loadMat();
+      insertHora();
+      loadTurma();
+      loadMat();
+    });
   });
-});
-
 }

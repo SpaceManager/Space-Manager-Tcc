@@ -106,12 +106,6 @@ tr:hover td {
     box-shadow: inset 6px 6px 6px #B70407;
 }
 
-/* .mainContainer {
-    height: 84vh;
-    min-width: 900px;
-    border-radius: 13px 13px 13px 13px;
-} */
-
 .table {
     padding-top: 2%;
 }
@@ -121,7 +115,7 @@ tr:hover td {
     text-shadow: none;
 }
 
-/* TELA DO MOBILE */
+/* MOBILE SCREEN */
 .mobileC{
     display: none;
     background-color: white;

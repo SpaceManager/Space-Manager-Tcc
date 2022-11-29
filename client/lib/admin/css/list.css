@@ -9,10 +9,8 @@
 }
 .headContainer{
   width: 80%;
-  /* height: 20%; */
   text-align: center;
   margin-top: 20px;
-  /* color: white; */
   background-color: #fff;
   display: flex;
   align-items: center;

@@ -14,7 +14,6 @@ const addCurso = async () => {
 
   const responseSM = await fetch(`${url}/cursos`, init);
   const data = await responseSM.json();
-  console.log(data);
   alert(data.mensage);
 
   clear();
@@ -34,7 +33,6 @@ const addMat = async () => {
 
   const responseSM = await fetch(`${url}/materias`, init);
   const data = await responseSM.json();
-  console.log(data);
   alert(data.mensage);
 
   clear();
@@ -54,7 +52,6 @@ const addHora = async () => {
 
   const responseSM = await fetch(`${url}/hora`, init);
   const data = await responseSM.json();
-  console.log(data);
   alert(data.mensage);
 
   clear();
@@ -74,7 +71,6 @@ const addSpace = async () => {
 
   const responseSM = await fetch(`${url}/space`, init);
   const data = await responseSM.json();
-  console.log(data);
   alert(data.mensage);
 
   clear();

@@ -57,9 +57,6 @@ const authen = async () => {
 
 function logout() {
   const confirma = confirm('Clique em "ok" para desconectar da sua conta.')
-
-  console.log(confirma)
-
   if (confirma == true) {
     sessionStorage.setItem("thistoken", "")
   sessionStorage.setItem("Usuário", "")

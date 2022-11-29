@@ -12,10 +12,7 @@ const loadDesRes = async (eventID) => {
       };
   
       const responseSM = await fetch("http://localhost:1313/admget", init);
-      const resp = await responseSM.json()
-      console.log(resp)
-
-    
+      const resp = await responseSM.json()    
       document.getElementById("descricaoReserva").innerHTML =
         "<b>Descrição:</b> <br>" + resp.descriRes;
       document.getElementById("salaReservada").innerHTML =
@@ -29,7 +26,6 @@ const loadDesRes = async (eventID) => {
       document.getElementById("professor").innerHTML =
         "<b>Professor:</b> " + resp.userRes;
     
-      // Btn deletar reserva!!!!!!!
       document.querySelector(".changeRes").innerHTML = `
       <button onclick="deleteReserva(${resp.idRes})" class="btn-remove-event" >Deletar Reserva</button>`
 }    

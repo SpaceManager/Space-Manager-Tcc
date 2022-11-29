@@ -3,13 +3,8 @@ body {
   align-items: center;
   justify-content: center;
 }
-/* div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-select{
-  width: 30%;
+select {
+  width: 100%;
   height: 35px;
   border-radius: 5px;
   background-color: #e01313;
@@ -18,14 +13,14 @@ select{
   outline: none;
   margin-bottom: 10px;
 }
-option{
+option {
   background-color: #ffffff;
   color: #000000;
 }
 .mainContainer {
-  width: 80%;
+  width: 280px;
   padding: 20px;
-  height: 75%;
+  height: 50%;
   background-color: #fff;
   border-radius: 13px;
 
@@ -35,36 +30,25 @@ option{
   justify-content: center;
   margin-top: 20px;
 }
-.list-group{
+.list-group {
+  width: 240px;
   text-align: center;
   max-height: 80%;
   display: grid;
   grid-auto-flow: row;
   column-gap: 1em;
   overflow-y: auto;
-  width: 30%;
 }
-.list-group-item{
+
+.list-group-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-.fa-trash{
+.fa-trash {
   cursor: pointer;
 }
-.fa-trash:hover{
+.fa-trash:hover {
   color: #e01313;
-}
-
-
-@media (max-width: 940px) {
-  select{
-    width: 60%;
-  }
-}
-@media (max-width: 600px) {
-  select{
-    width: 80%;
-  }
 }

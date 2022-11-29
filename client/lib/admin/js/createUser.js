@@ -1,4 +1,3 @@
-// gerar senha automática com js  https://www.instagram.com/p/CiZvFVDjnBw/
 const gerarPass = async () => {
   const charset = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9","#","@","&","%","$",];
   var password = "";
@@ -16,12 +15,8 @@ const cadUser = async (pass) => {
   var num = String(document.getElementById("numProfile").value);
   var type = document.getElementById("mtProfile").value;
 
-  console.log(type);
-
   if (type === "Selecionar o Tipo de Usuário") {
     const infoUser = [nome, email, rm, num, ""];
-    console.log(infoUser);
-
     cadmat(infoUser);
   } else if (type === "coord") {
     const user = {
@@ -42,9 +37,6 @@ const cadUser = async (pass) => {
       },
       body: JSON.stringify(user),
     };
-    console.log(user);
-
-    // const responseSM = await fetch('https://space-manager-api.herokuapp.com/cad', init);
     const responseSM = await fetch("http://localhost:1313/cad", init);
     const data = await responseSM.json();
     if (data.mensage == "Usuário Cadastrado com Sucesso!") {
@@ -72,8 +64,6 @@ const cadUser = async (pass) => {
       },
       body: JSON.stringify(user),
     };
-    console.log(user);
-
     const responseSM = await fetch("http://localhost:1313/cad", init);
     const data = await responseSM.json();
     if (data.mensage == "Usuário Cadastrado com Sucesso!") {
@@ -89,11 +79,7 @@ const cadUser = async (pass) => {
     localStorage.setItem('num', num)
     localStorage.setItem('type', type)
     localStorage.setItem('pass', pass)
-    console.log("Tipo prof");
-
-    const infoUser = [nome, email, rm, num, type, pass];
-    console.log(infoUser);
-    cadmat(infoUser);
+    const infoUser = [nome, email, rm, num, type, pass];    cadmat(infoUser);
   }
 };
 
@@ -101,20 +87,12 @@ const cadmat = async (infoUser) => {
   const infoForUser = ["nome", "email", "rm", "num", "tipo", "senha"];
   const falta = [];
   for (let index = 0; index < infoUser.length; index++) {
-    if (infoUser[index] === "") {
-      console.log(`O ${infoForUser[index]} não foi preechido!`);
-      falta.push(infoForUser[index]);
-    } else {
-      console.log(`Já o ${infoForUser[index]} foi preenchido`);
-    }
+    if (infoUser[index] === "") {      falta.push(infoForUser[index]);
+    } else {    }
   }
-  console.log(falta);
-
   if (falta.length == 0) {
     const infoItemSelect = await fetch(`http://localhost:1313/materias`);
     const resp = await infoItemSelect.json();
-
-    console.log(resp);
     document.querySelector(
       ".mainContainer"
     ).innerHTML = `<h2 class="titleProfile">Cadastrar Matérias</h2><br> <div class="list"><ul class="list-group"></ul></div> <div class="controllers">
@@ -122,9 +100,7 @@ const cadmat = async (infoUser) => {
     <button id="cancelButton"><i class="fa-solid fa-xmark"></i></button>
   </div>`;
 
-    for (let index = 0; index < resp.length; index++) {
-      console.log(resp[index].matsMat);
-      document.querySelector(".list-group").innerHTML += `
+    for (let index = 0; index < resp.length; index++) {      document.querySelector(".list-group").innerHTML += `
        <div class="input-group mb-3">
        <div class="input-group-text">
          <input id="mat${index}" class="form-check-input mt-0 checkIpt" type="checkbox" value="${resp[index].idMat}" aria-label="Checkbox for following text input">
@@ -148,21 +124,15 @@ const cadastrar = async () => {
   const pass = localStorage.getItem('pass')
   const rm = localStorage.getItem('rm')
   
-  console.log(nome, email, num, type)
-
 
   const matProf = [];
 
   const infoItemSelect = await fetch(`http://localhost:1313/materias`);
-  const resp = await infoItemSelect.json();
-  console.log("Cadastrando");
-  for (let index = 0; index < resp.length; index++) {
+  const resp = await infoItemSelect.json();  for (let index = 0; index < resp.length; index++) {
     if (document.getElementById(`mat${index}`).checked === true) {
       matProf.push(document.getElementById(`mat${index}`).value);
     }
   }
-  console.log(matProf);
-
   const user = {
     rm: String(rm),
     nome: nome,
@@ -181,9 +151,7 @@ const cadastrar = async () => {
     },
     body: JSON.stringify(user),
   };
-  console.log(user);
 
-  // const responseSM = await fetch('https://space-manager-api.herokuapp.com/cad', init);
   const responseSM = await fetch("http://localhost:1313/cad", init);
   const data = await responseSM.json();
   if (data.mensage == "Usuário Cadastrado com Sucesso!") {

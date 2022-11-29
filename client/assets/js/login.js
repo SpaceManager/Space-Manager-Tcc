@@ -32,10 +32,9 @@ const loadCap = async () => {
 };
 
 const login = async () => {
-  const infos = ['RM', 'SENHA']
+  const infos = ['RM', 'SENHA'] 
   const ipts = []
   ipts.push(iptLog.value, iptPass.value)
-  console.log(ipts)
 
   for (let index = 0; index < ipts.length; index++) {
     if (ipts[index] == '') {

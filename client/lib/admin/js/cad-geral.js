@@ -10,25 +10,21 @@ document.getElementById('itemSelect').addEventListener("change", async () => {
   if (itemSelect == 'materias') {
     for (let index = 0; index < resp.length; index++) {
       document.querySelector('.list-group').innerHTML += `<li class="list-group-item">${resp[index].matsMat} <i class="fa-solid fa-trash" onclick="deletMat('${resp[index].matsMat}')"></i></li>`
-      console.log(itemSelect)
     }
   }
   else if (itemSelect == 'hora') {
     for (let index = 0; index < resp.length; index++) {
       document.querySelector('.list-group').innerHTML += `<li class="list-group-item">${resp[index].horsHora} <i class="fa-solid fa-trash" onclick="deletHor('${resp[index].horsHora}')"></i></li>`
-      console.log(itemSelect)
     }
   }
   else if (itemSelect == 'space') {
     for (let index = 0; index < resp.length; index++) {
       document.querySelector('.list-group').innerHTML += `<li class="list-group-item">${resp[index].espEspa} <i class="fa-solid fa-trash" onclick="deletSpa('${resp[index].espEspa}')"></i></li>`
-      console.log(itemSelect)
     }
   }
   else if (itemSelect == 'cursos') {
     for (let index = 0; index < resp.length; index++) {
       document.querySelector('.list-group').innerHTML += `<li class="list-group-item">${resp[index].curCurs} <i class="fa-solid fa-trash" onclick="deletCur('${resp[index].curCurs}')"></i></li>`
-      console.log(itemSelect)
     }
   }
 })
