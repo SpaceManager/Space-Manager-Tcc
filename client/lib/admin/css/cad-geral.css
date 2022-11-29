@@ -42,6 +42,19 @@ option{
   grid-auto-flow: row;
   column-gap: 1em;
   overflow-y: auto;
+  width: 30%;
+}
+.list-group-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.fa-trash{
+  cursor: pointer;
+}
+.fa-trash:hover{
+  color: #e01313;
 }
 
 

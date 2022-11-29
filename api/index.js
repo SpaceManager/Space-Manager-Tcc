@@ -638,11 +638,11 @@ app.post("/modcurso", async (req, res) => {
   }
 });
 
-app.get("/delcurso/:nomeC", async (req, res) => {
+app.post("/delcurso", async (req, res) => { //começa aqui
   await bd.sync();
   const cursos = await cursoSM.findOne({
     where: {
-      curCurs: req.params.nomeC,
+      curCurs: req.body.curso,
     },
   });
   await cursos.destroy().then(function () {
@@ -650,6 +650,60 @@ app.get("/delcurso/:nomeC", async (req, res) => {
       mensage: "Curso excluido com sucesso!",
     });
   });
+});
+
+app.post("/delmat", async (req, res) => {
+  await bd.sync();
+  const materia = await Materia.findOne({
+    where: {
+      matsMat: req.body.materia,
+    },
+  });
+  await materia.destroy().then(function () {
+    res.send({
+      mensage: "matéria excluida com sucesso!",
+    });
+  });
+});
+
+app.post("/delHora", async (req, res) => {
+  await bd.sync();
+  const hora = await smHora.findOne({
+    where: {
+      horsHora: req.body.horario,
+    },
+  });
+  if (hora == null) {
+    res.send({
+      mensage: "nada encontrado",
+    });
+  } else {
+    await hora.destroy().then(function () {
+      res.send({
+        mensage: "Horário excluido com sucesso!",
+      });
+    });
+  }
+});
+
+app.post("/delSpace", async (req, res) => {
+  await bd.sync();
+  const space = await Space.findOne({
+    where: {
+      espEspa: req.body.space,
+    },
+  });
+  if (space == null) {
+    res.send({
+      mensage: "nada encontrado",
+    });
+  } else {
+    await space.destroy().then(function () {
+      res.send({
+        mensage: "Espaço excluido com sucesso!",
+      });
+    });
+  }
 });
 
 app.post("/list", async (req, res) => {
@@ -729,19 +783,7 @@ app.post("/modMat", async (req, res) => {
   }
 });
 
-app.get("/delmat/:nomeM", async (req, res) => {
-  await bd.sync();
-  const materia = await Materia.findOne({
-    where: {
-      matsMat: req.params.nomeM,
-    },
-  });
-  await materia.destroy().then(function () {
-    res.send({
-      mensage: "matéria excluida com sucesso!",
-    });
-  });
-});
+
 // =========================== ADICIONANDO ESPAÇOS AO SISTEMA =======================
 
 app.post("/seachHoraSpace", (req, res) => {
@@ -865,26 +907,6 @@ app.post("/modSpace", async (req, res) => {
     });
   }
 });
-
-app.get("/delSpace/:nomeS", async (req, res) => {
-  await bd.sync();
-  const space = await Space.findOne({
-    where: {
-      espEspa: req.params.nomeS,
-    },
-  });
-  if (space == null) {
-    res.send({
-      mensage: "nada encontrado",
-    });
-  } else {
-    await space.destroy().then(function () {
-      res.send({
-        mensage: "Espaço excluido com sucesso!",
-      });
-    });
-  }
-});
 // =========================== ADICIONANDO HORÁRIOS AO SISTEMA =======================
 app.get("/hora", async (req, res) => {
   await bd.sync();
@@ -916,6 +938,7 @@ app.post("/hora", async (req, res) => {
   } else {
     res.send({
       mensage: `Não é possivel adicionar o horário, pois já há um cadastrado no sistema!`,
+      
       Horário: horsHora,
     });
   }
@@ -946,25 +969,6 @@ app.post("/modHora", async (req, res) => {
   }
 });
 
-app.post("/delHora", async (req, res) => {
-  await bd.sync();
-  const hora = await smHora.findOne({
-    where: {
-      horsHora: req.body.horario,
-    },
-  });
-  if (hora == null) {
-    res.send({
-      mensage: "nada encontrado",
-    });
-  } else {
-    await hora.destroy().then(function () {
-      res.send({
-        mensage: "Horário excluido com sucesso!",
-      });
-    });
-  }
-});
 
 // ============================= ADICIONANDO USUÁRIOS =============================
 
