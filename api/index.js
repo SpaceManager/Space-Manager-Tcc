@@ -30,7 +30,7 @@ app.post("/authen", async (req, res) => {
       idCad: idForUser,
     },
   });
-  console.log(user)
+  console.log(user);
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
       console.log({
@@ -47,7 +47,7 @@ app.post("/authen", async (req, res) => {
         res.send({
           mensage: "Token válido",
           userID: decoded.userID,
-          type: user.typeCad
+          type: user.typeCad,
         });
       } else {
         res.send({
@@ -83,7 +83,7 @@ app.post("/login", async (req, res) => {
           token: token,
           idUser: user.idCad,
           type: user.typeCad,
-          status: user.stateCad
+          status: user.stateCad,
         });
       } else {
         res.send({
@@ -146,7 +146,7 @@ app.post("/validationUser", async (req, res) => {
       mensage:
         "Um email foi enviado para seu email, cheque sua caixa de email ou spam para realizar a alteração da senha",
       token: token,
-      id: user.idCad
+      id: user.idCad,
     });
   }
 });
@@ -154,45 +154,45 @@ app.post("/validationUser", async (req, res) => {
 app.post("/change", async (req, res) => {
   await bd.sync();
   const { id, pass } = req.body;
-        bcrypt.hash(pass, 10, async (errBcrypt, hash) => {
-          if (errBcrypt) {
-            return res.status(500).send({
-              errpr: errBcrypt,
-            });
-          } else {
-            const user = await Prof.findOne({
-              where: {
-                idCad: id
-              },
-            });
+  bcrypt.hash(pass, 10, async (errBcrypt, hash) => {
+    if (errBcrypt) {
+      return res.status(500).send({
+        errpr: errBcrypt,
+      });
+    } else {
+      const user = await Prof.findOne({
+        where: {
+          idCad: id,
+        },
+      });
 
-            user.seCad = hash;
-            await user.save().then(() => {
-              transport
-              .sendMail({
-                from: "Space Manager <spacemanagerGR@gmail.com>",
-                to: user.emailCad,
-                subject: "Alteração de senha",
-                html: `
+      user.seCad = hash;
+      await user.save().then(() => {
+        transport
+          .sendMail({
+            from: "Space Manager <spacemanagerGR@gmail.com>",
+            to: user.emailCad,
+            subject: "Alteração de senha",
+            html: `
               <h1>Olá ${user.namecCad}!</h1>
               <h3>Sua senha acaba de ser alterada com sucesso!</h3>
                 <h3>Caso não tenha sido você que fez a mudança, entre em contato com o administrador do sistema (Secretaria da Escola)</h3>
                 `,
-                text: `Alteração da senha`,
-              })
-              .then((response) => {
-                console.log(response);
-                res.send({
-                  mensage: `Senha modificada com sucesso!`,
-                });
-              })
-              .catch((err) => {
-                console.log("This is error: " + err);
-              });
+            text: `Alteração da senha`,
+          })
+          .then((response) => {
+            console.log(response);
+            res.send({
+              mensage: `Senha modificada com sucesso!`,
             });
-          }
-        });
+          })
+          .catch((err) => {
+            console.log("This is error: " + err);
+          });
+      });
+    }
   });
+});
 app.get("/loadMat/:id", async (req, res) => {
   await bd.sync();
   const mats = [];
@@ -234,22 +234,21 @@ app.get("/reservas", async (req, res) => {
 
   const reserva = await rese.findAll();
   const evoCalendarInfo = [];
-    const thisDate = "date";
-    for (let index = 0; index < reserva.length; index++) {
-      const events = {
-        id: "eventId" + reserva[index].idRes,
-        name: `${reserva[index].horaResDe} - ${reserva[index].horaResAte}`,
-        date: reserva[index].dayRes,
-        description: `Local: ${reserva[index].espaRes}`,
-        type: "event",
-      };
-      evoCalendarInfo.push(events);
-    }
-    res.send({
-      evoCalendarInfo: evoCalendarInfo,
-      reservas: reserva
-    });
-
+  const thisDate = "date";
+  for (let index = 0; index < reserva.length; index++) {
+    const events = {
+      id: "eventId" + reserva[index].idRes,
+      name: `${reserva[index].horaResDe} - ${reserva[index].horaResAte}`,
+      date: reserva[index].dayRes,
+      description: `Local: ${reserva[index].espaRes}`,
+      type: "event",
+    };
+    evoCalendarInfo.push(events);
+  }
+  res.send({
+    evoCalendarInfo: evoCalendarInfo,
+    reservas: reserva,
+  });
 });
 
 app.post("/getreservas", async (req, res) => {
@@ -270,10 +269,10 @@ app.post("/getreservas", async (req, res) => {
   }
 });
 
-app.post('/admget', async (req, res) => {
+app.post("/admget", async (req, res) => {
   await bd.sync();
-  const {id} = req.body
-  console.log(id)
+  const { id } = req.body;
+  console.log(id);
   const reserva = await rese.findOne({
     where: {
       idRes: id,
@@ -287,7 +286,7 @@ app.post('/admget', async (req, res) => {
   } else {
     res.send(reserva);
   }
-})
+});
 
 app.post("/getReservasByID", async (req, res) => {
   await bd.sync();
@@ -357,7 +356,7 @@ app.post("/getCoordRes", async (req, res) => {
         id: "eventId" + nrese[index].idRes,
         name: `${nrese[index].horaResDe} - ${nrese[index].horaResAte}`,
         date: nrese[index].dayRes,
-        description:  nrese[index].espaRes,
+        description: nrese[index].espaRes,
         type: "event",
       };
       evoCalendarInfo.push(events);
@@ -431,7 +430,7 @@ app.post("/reservas", async (req, res) => {
             idRes: reservaa.idRes,
             espRes: req.body.space,
             dayRes: req.body.data,
-            idUser: req.body.idUser
+            idUser: req.body.idUser,
           });
         }
         res.send({
@@ -459,21 +458,23 @@ app.post("/updateRes", async (req, res) => {
     },
   });
 
-  thisRes.curRes = turma
-  thisRes.matRes = materia
-  thisRes.descriRes = descri
+  thisRes.curRes = turma;
+  thisRes.matRes = materia;
+  thisRes.descriRes = descri;
 
-  await thisRes.save().then(() => {
-    res.send({
-      status: 200,
-      mensage:
-        "Reserva alterada com sucesso",
-    });
-  }).catch(() => {
-    res.send({
-      mensage: 'erro'
+  await thisRes
+    .save()
+    .then(() => {
+      res.send({
+        status: 200,
+        mensage: "Reserva alterada com sucesso",
+      });
     })
-  })
+    .catch(() => {
+      res.send({
+        mensage: "erro",
+      });
+    });
   console.log(thisRes);
 });
 
@@ -489,11 +490,11 @@ app.post("/reservasdel", async (req, res) => {
   });
   const delRelacionamento = await relacionamentoReserva.findOne({
     where: {
-      idRes: id
-    }
-  })
+      idRes: id,
+    },
+  });
   if (delres) {
-    await delres.destroy()
+    await delres.destroy();
     await delRelacionamento.destroy().then(
       res.send({
         mensage: "Reserva excluida com sucesso!",
@@ -558,17 +559,17 @@ app.get("/perfilreative/:id", async (req, res) => {
   });
 });
 
-app.post('/seachProfid', async (req, res) => {
-  await bd.sync()
+app.post("/seachProfid", async (req, res) => {
+  await bd.sync();
 
-  const { id } = req.body
+  const { id } = req.body;
   const user = await Prof.findOne({
     where: {
       idCad: id,
     },
-  }); 
-  res.send(user)
-})
+  });
+  res.send(user);
+});
 // ============================ TELA DE ADMIN ============================
 app.get("/horario", async (req, res) => {
   await bd.sync();
@@ -638,7 +639,8 @@ app.post("/modcurso", async (req, res) => {
   }
 });
 
-app.post("/delcurso", async (req, res) => { //começa aqui
+app.post("/delcurso", async (req, res) => {
+  //começa aqui
   await bd.sync();
   const cursos = await cursoSM.findOne({
     where: {
@@ -668,9 +670,10 @@ app.post("/delmat", async (req, res) => {
 
 app.post("/delHora", async (req, res) => {
   await bd.sync();
+  const { horario } = req.body;
   const hora = await smHora.findOne({
     where: {
-      horsHora: req.body.horario,
+      horsHora: horario,
     },
   });
   if (hora == null) {
@@ -678,9 +681,44 @@ app.post("/delHora", async (req, res) => {
       mensage: "nada encontrado",
     });
   } else {
+    console.log('hora: ')
+    console.log(hora)
+    const findAllRese = await relacionamentoReserva.findAll({
+      where: {
+        idHora: horario,
+      },
+    });
+    const idReserva = [];
+
+    for (let index = 0; index < findAllRese.length; index++) {
+      idReserva.push(findAllRese[index].idRes);
+
+      const deleteFAR = await relacionamentoReserva.findOne({
+        where: {
+          idRel: findAllRese[index].idRel,
+        },
+      });
+
+      await deleteFAR.destroy();
+      console.log('deleteFAR')
+      console.log(deleteFAR)
+    }
+
+    for (let index = 0; index < idReserva.length; index++) {
+      const findRese = await rese.findOne({
+        where: {
+          idRes: idReserva[index],
+        },
+      });
+      await findRese.destroy();
+      console.log('findRese');
+      console.log(findRese);
+    }
+
     await hora.destroy().then(function () {
       res.send({
-        mensage: "Horário excluido com sucesso!",
+        mensage:
+          "Horário excluido com sucesso! Aviso: todas as reservas que tinham neste horário também foram excluidas com sucesso",
       });
     });
   }
@@ -783,7 +821,6 @@ app.post("/modMat", async (req, res) => {
   }
 });
 
-
 // =========================== ADICIONANDO ESPAÇOS AO SISTEMA =======================
 
 app.post("/seachHoraSpace", (req, res) => {
@@ -799,11 +836,11 @@ app.get("/space", async (req, res) => {
 app.post("/spaceSeach", async (req, res) => {
   await bd.sync();
   const hor = await smHora.findAll();
-  const horarios = []
-  const horariosOcupado = []
-  
+  const horarios = [];
+  const horariosOcupado = [];
+
   for (let index = 0; index < hor.length; index++) {
-    horarios.push(hor[index].horsHora)
+    horarios.push(hor[index].horsHora);
   }
 
   const { room, day, idUser } = req.body;
@@ -812,47 +849,48 @@ app.post("/spaceSeach", async (req, res) => {
     where: {
       espRes: room,
       dayRes: day,
-    }
-  })
-  
+    },
+  });
+
   for (let i = 0; i < verificarSala.length; i++) {
-    horariosOcupado.push(verificarSala[i].idHora)
+    horariosOcupado.push(verificarSala[i].idHora);
   }
-  
+
   const verificarProf = await relacionamentoReserva.findAll({
     where: {
       idUser: idUser,
       dayRes: day,
-    }
-  })
-  
+    },
+  });
+
   for (let a = 0; a < verificarProf.length; a++) {
-    horariosOcupado.push(verificarProf[a].idHora)
+    horariosOcupado.push(verificarProf[a].idHora);
   }
-  const ocupado = horariosOcupado.filter((este, i) => horariosOcupado.indexOf(este) === i);
-  var reservado = horarios
+  const ocupado = horariosOcupado.filter(
+    (este, i) => horariosOcupado.indexOf(este) === i
+  );
+  var reservado = horarios;
   if (ocupado.length != 0) {
     for (let index = 0; index < ocupado.length; index++) {
-      console.log(horarios.indexOf(ocupado[index]))
-      const i = horarios.indexOf(ocupado[index])
-      reservado[i] = 'OCUPADO'
+      console.log(horarios.indexOf(ocupado[index]));
+      const i = horarios.indexOf(ocupado[index]);
+      reservado[i] = "OCUPADO";
     }
-    const livre = []
+    const livre = [];
     for (let index = 0; index < reservado.length; index++) {
-      if (reservado[index] != 'OCUPADO') {
-        livre.push(reservado[index])
-      }  
+      if (reservado[index] != "OCUPADO") {
+        livre.push(reservado[index]);
+      }
     }
     res.send({
       livre: livre,
       reservado: ocupado,
-      allHoras: reservado
-    })
-  }
-  else {
+      allHoras: reservado,
+    });
+  } else {
     res.send({
-      livre: horarios
-    })
+      livre: horarios,
+    });
   }
 });
 
@@ -938,7 +976,7 @@ app.post("/hora", async (req, res) => {
   } else {
     res.send({
       mensage: `Não é possivel adicionar o horário, pois já há um cadastrado no sistema!`,
-      
+
       Horário: horsHora,
     });
   }
@@ -968,7 +1006,6 @@ app.post("/modHora", async (req, res) => {
     });
   }
 });
-
 
 // ============================= ADICIONANDO USUÁRIOS =============================
 

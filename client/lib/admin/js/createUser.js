@@ -1,5 +1,73 @@
 const gerarPass = async () => {
-  const charset = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9","#","@","&","%","$",];
+  const charset = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "#",
+    "@",
+    "&",
+    "%",
+    "$",
+  ];
   var password = "";
   for (let index = 0; index < 8; index++) {
     password += charset[Math.floor(Math.random() * charset.length)];
@@ -73,13 +141,14 @@ const cadUser = async (pass) => {
       alert(data.mensage);
     }
   } else if (type === "prof") {
-    localStorage.setItem('nome', nome)
-    localStorage.setItem('rm', rm)
-    localStorage.setItem('email', email)
-    localStorage.setItem('num', num)
-    localStorage.setItem('type', type)
-    localStorage.setItem('pass', pass)
-    const infoUser = [nome, email, rm, num, type, pass];    cadmat(infoUser);
+    localStorage.setItem("nome", nome);
+    localStorage.setItem("rm", rm);
+    localStorage.setItem("email", email);
+    localStorage.setItem("num", num);
+    localStorage.setItem("type", type);
+    localStorage.setItem("pass", pass);
+    const infoUser = [nome, email, rm, num, type, pass];
+    cadmat(infoUser);
   }
 };
 
@@ -87,8 +156,10 @@ const cadmat = async (infoUser) => {
   const infoForUser = ["nome", "email", "rm", "num", "tipo", "senha"];
   const falta = [];
   for (let index = 0; index < infoUser.length; index++) {
-    if (infoUser[index] === "") {      falta.push(infoForUser[index]);
-    } else {    }
+    if (infoUser[index] === "") {
+      falta.push(infoForUser[index]);
+    } else {
+    }
   }
   if (falta.length == 0) {
     const infoItemSelect = await fetch(`http://localhost:1313/materias`);
@@ -100,7 +171,8 @@ const cadmat = async (infoUser) => {
     <button id="cancelButton"><i class="fa-solid fa-xmark"></i></button>
   </div>`;
 
-    for (let index = 0; index < resp.length; index++) {      document.querySelector(".list-group").innerHTML += `
+    for (let index = 0; index < resp.length; index++) {
+      document.querySelector(".list-group").innerHTML += `
        <div class="input-group mb-3">
        <div class="input-group-text">
          <input id="mat${index}" class="form-check-input mt-0 checkIpt" type="checkbox" value="${resp[index].idMat}" aria-label="Checkbox for following text input">
@@ -116,19 +188,18 @@ const cadmat = async (infoUser) => {
 // document.querySelector('.saveBtn').addEventListener('click', cadastrar())
 
 const cadastrar = async () => {
-
-    const nome = localStorage.getItem('nome')
-    const email = localStorage.getItem('email')
-    const num = localStorage.getItem('num')
-    const type = localStorage.getItem('type')
-  const pass = localStorage.getItem('pass')
-  const rm = localStorage.getItem('rm')
-  
+  const nome = localStorage.getItem("nome");
+  const email = localStorage.getItem("email");
+  const num = localStorage.getItem("num");
+  const type = localStorage.getItem("type");
+  const pass = localStorage.getItem("pass");
+  const rm = localStorage.getItem("rm");
 
   const matProf = [];
 
   const infoItemSelect = await fetch(`http://localhost:1313/materias`);
-  const resp = await infoItemSelect.json();  for (let index = 0; index < resp.length; index++) {
+  const resp = await infoItemSelect.json();
+  for (let index = 0; index < resp.length; index++) {
     if (document.getElementById(`mat${index}`).checked === true) {
       matProf.push(document.getElementById(`mat${index}`).value);
     }
