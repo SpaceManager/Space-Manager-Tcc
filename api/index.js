@@ -901,6 +901,8 @@ app.post("/spaceSeach", async (req, res) => {
     },
   });
 
+  console.log(verificarProf)
+
   for (let a = 0; a < verificarProf.length; a++) {
     horariosOcupado.push(verificarProf[a].idHora);
   }

@@ -56,13 +56,10 @@ const saveRes = async () => {
 
     for (let index = 0; index < mesesIngles.length; index++) {
       if (dateRes.includes(mesesPortugues[index]) == true) {
-        console.log(dateRes)
         formatData = dateRes.replace(mesesPortugues[index], mesesIngles[index]);
-        console.log(formatData);
       }
     }
 
-    console.log(formatData)
 
     for (let index = 0; index < respHora.length; index++) {
       theHora.push(respHora[index].horsHora);
@@ -283,9 +280,49 @@ function loadModal() {
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get("user");
 
+    const dayy = document.querySelector(".event-header").textContent
+
+    const mesesIngles = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const mesesPortugues = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
+
+    var formatData = "";
+
+    for (let index = 0; index < mesesIngles.length; index++) {
+      if (dayy.includes(mesesPortugues[index]) == true) {
+        formatData = dayy.replace(mesesPortugues[index], mesesIngles[index]);
+      }
+    }
+
+
     const log = {
       room: document.getElementById("space").value,
-      day: document.querySelector(".event-header").textContent,
+      day: formatData,
       idUser: idParam,
     };
     const init = {
