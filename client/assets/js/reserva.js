@@ -131,7 +131,7 @@ const loadDesRes = async (eventID) => {
     "<b>Turma:</b> " + resp.curRes;
   document.getElementById("matReserva").innerHTML =
     "<b>Matéria:</b> " + resp.matRes;
-
+  
   // ATUALIZAR A RESERVA!!!!!!!
   document.querySelector(".changeRes").innerHTML = `
   <button onclick="deleteReserva(${resp.idRes})" class="btn-remove-event" >Deletar Reserva</button>
@@ -197,6 +197,7 @@ const loadDesRes = async (eventID) => {
     }
   }
   document.getElementById("descriChange").value = resp.descriRes;
+  document.querySelector(".openList").style.display = "block";
 };
 
 const deleteReserva = async (id) => {

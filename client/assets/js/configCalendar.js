@@ -31,7 +31,7 @@ const loadRese = async () => {
       format: "MM dd, yyyy",
       eventHeaderFormat: "MM dd, yyyy",
       sidebarDisplayDefault: true,
-      eventDisplayDefault: false,
+      eventDisplayDefault: true,
       todayHighlight: true,
       
       //Mudanças add aqui!!!!
@@ -64,7 +64,7 @@ const loadRese = async () => {
       format: "MM dd, yyyy",
       eventHeaderFormat: "MM dd, yyyy",
       sidebarDisplayDefault: true,
-      eventDisplayDefault: false,
+      eventDisplayDefault: true,
       todayHighlight: true,
       
       //Mudanças add aqui!!!!

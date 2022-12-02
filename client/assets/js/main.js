@@ -55,6 +55,94 @@ const authen = async () => {
 
 };
 
+const openListModal = async () => {
+  console.log(document.querySelector('.event-header').textContent)
+  const day = document.querySelector('.event-header').textContent
+  const mesesIngles = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const mesesPortugues = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+
+  var formatData = "";
+
+  for (let index = 0; index < mesesIngles.length; index++) {
+    if (day.includes(mesesPortugues[index]) == true) {
+      formatData = day.replace(mesesPortugues[index], mesesIngles[index]);
+    }
+  }
+
+  console.log(formatData)
+
+  const log = {
+    day: formatData
+  };
+
+  const init = {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify(log),
+  };
+
+  const responseSM = await fetch("http://localhost:1313/modalist", init);
+  const data = await responseSM.json();
+
+  console.log(data)
+
+  if (data.mensage) {
+    document.querySelector('.reservas-list-group').innerHTML = ''
+    document.querySelector('.reservas-list-group').innerHTML = `
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">${data.mensage}</h5>
+    </div>
+    <p class="mb-1"></p>
+  </a>
+    `
+  }
+  else {
+    const reservas = data.reservas
+    console.log(reservas)
+    document.querySelector('.reservas-list-group').innerHTML = ''
+    for (let index = 0; index < reservas.length; index++) {
+      console.log(data[index])
+      document.querySelector('.reservas-list-group').innerHTML += `
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><b>${reservas[index].horaResDe} - ${reservas[index].horaResAte}</b></h5>
+    </div>
+    <p class="mb-1"><b>Espaço: </b>${reservas[index].espaRes} <br> <b>Professor:</b> ${reservas[index].userRes}</p>
+  </a>
+    `
+    }
+  }
+}
+
 function logout() {
   const confirma = confirm('Clique em "ok" para desconectar da sua conta.')
   if (confirma == true) {

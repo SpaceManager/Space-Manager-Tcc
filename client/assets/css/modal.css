@@ -28,11 +28,13 @@
 }
 .btn-remove-event{
   color: #e1e1e1;
-  background-color: #f02727;
+  background-color:#dc3545;
   font-weight: 500;
   padding: 5px;
-  border-radius: 10%;
+  border-radius: 5%;
   margin-bottom: 30px;
+  padding: 10px;
+  border: none;
 }
 
 textarea {

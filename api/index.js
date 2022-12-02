@@ -201,16 +201,17 @@ app.get("/loadMat/:id", async (req, res) => {
       idUser: req.params.id,
     },
   });
+  console.log(seachMatForUser)
 
   for (let index = 0; index < seachMatForUser.length; index++) {
-    matForUser = await Materia.findOne({
+    const matForUser = await Materia.findOne({
       where: {
         idMat: seachMatForUser[index].idMat,
       },
     });
+    console.log(matForUser)
     mats.push(matForUser.matsMat);
   }
-  // console.log(matForUser)
 
   res.send(mats);
 });
@@ -268,6 +269,28 @@ app.post("/getreservas", async (req, res) => {
     res.send(reserva);
   }
 });
+
+app.post('/modalist', async (req, res) => {
+  await bd.sync()
+  const {day} = req.body
+
+  const getReservas = await rese.findAll({
+    where: {
+      dayRes: day
+    }
+  })
+
+  if (getReservas.length === 0) {
+    res.send({
+      mensage: 'Não há nehuma reserva de outros professores para hoje'
+    })
+  }
+  else{
+    res.send({
+      reservas: getReservas
+    })
+  }
+})
 
 app.post("/admget", async (req, res) => {
   await bd.sync();
@@ -676,51 +699,66 @@ app.post("/delHora", async (req, res) => {
       horsHora: horario,
     },
   });
-  if (hora == null) {
-    res.send({
-      mensage: "nada encontrado",
-    });
-  } else {
-    console.log('hora: ')
-    console.log(hora)
-    const findAllRese = await relacionamentoReserva.findAll({
+
+  if (hora) {
+    const seachRelacionamento = await relacionamentoReserva.findAll({
       where: {
-        idHora: horario,
-      },
-    });
-    const idReserva = [];
+        idHora: horario
+      }
+    })
 
-    for (let index = 0; index < findAllRese.length; index++) {
-      idReserva.push(findAllRese[index].idRes);
+    console.log(seachRelacionamento)
+    if (seachRelacionamento.length != 0) {
+      const ids = []
+      const idr = []
+      for (let index = 0; index < seachRelacionamento.length; index++) {
+         ids.push(seachRelacionamento[index].idRes)
+         idr.push(seachRelacionamento[index].idRel)
+      }
+      if (ids.length != 0) {
+        for (let i = 0; i < ids.length; i++) {
+          const deletReserva = await rese.findOne({
+            where: {
+              idRes: ids[i]
+            }
+          })
+          console.log(`--------------${i}--------------`)
+          console.log(deletReserva)
+          await deletReserva.destroy().then(async () => {
+            await hora.destroy().then(
+              async () => {
+                for (let index = 0; index < idr.length; index++) {
+                  const deletRelacionamento = await relacionamentoReserva.findOne({
+                    where: {
+                      idRel: idr[index]
+                    }
+                  })
+                  if (deletRelacionamento != null) {
+                    await deletRelacionamento.destroy()
+                  }
+                }
+                if (i == 1) {
+                  res.send({
+                    mensage: `Horário excluido! Aviso: ${i} reserva foi excluida com sucesso!`
+                  })
+                }
+                else {
+                  res.send({
+                    mensage: `Horário excluido! Aviso: ${i} reservas foram excluidas com sucesso`
+                  })
+                }
+              }
+            )
+          })
+        }
+      }
 
-      const deleteFAR = await relacionamentoReserva.findOne({
-        where: {
-          idRel: findAllRese[index].idRel,
-        },
-      });
-
-      await deleteFAR.destroy();
-      console.log('deleteFAR')
-      console.log(deleteFAR)
     }
-
-    for (let index = 0; index < idReserva.length; index++) {
-      const findRese = await rese.findOne({
-        where: {
-          idRes: idReserva[index],
-        },
-      });
-      await findRese.destroy();
-      console.log('findRese');
-      console.log(findRese);
-    }
-
-    await hora.destroy().then(function () {
+    else {
       res.send({
-        mensage:
-          "Horário excluido com sucesso! Aviso: todas as reservas que tinham neste horário também foram excluidas com sucesso",
-      });
-    });
+        mensage: 'Horário Excluido com sucesso e sem alterações nas reservas'
+      })
+    }
   }
 });
 
