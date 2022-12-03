@@ -52,7 +52,7 @@ const deletMat = async (param) => {
   }
 }  
 const deletHor = async (param) => {
-  const confirmacao = confirm(`Deseja excluir o horário ${param}?`)
+  const confirmacao = confirm(`Deseja excluir o horário ${param}? Aviso: Caso haja alguma reserva nesse horário, a mesma será excluida!`)
 
   if (confirmacao == true) {
     const log = {
@@ -65,7 +65,7 @@ const deletHor = async (param) => {
       },
       body: JSON.stringify(log),
     };
-    const responseSM = await fetch(`${url}/horario`, init);
+    const responseSM = await fetch(`${url}/delHora`, init);
     const data = await responseSM.json();
 
     alert(data.mensage)
@@ -73,7 +73,7 @@ const deletHor = async (param) => {
   }
 }  
 const deletSpa = async (param) => {
-  const confirmacao = confirm(`Deseja excluir a matéria ${param}?`)
+  const confirmacao = confirm(`Deseja excluir o espaço ${param}?`)
 
   if (confirmacao == true) {
     const log = {

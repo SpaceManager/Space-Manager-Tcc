@@ -30,19 +30,12 @@ app.post("/authen", async (req, res) => {
       idCad: idForUser,
     },
   });
-  console.log(user);
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
-      console.log({
-        erro: err,
-        token: token,
-      });
       res.send({
         mensage: "Token inválido",
       });
     } else {
-      console.log(idForUser);
-      console.log("This is INFO for Token: " + decoded.userID, token);
       if (idForUser == decoded.userID) {
         res.send({
           mensage: "Token válido",
@@ -69,7 +62,6 @@ app.post("/login", async (req, res) => {
   });
 
   if (user === null) {
-    console.log("Usuário não encontrado");
   } else {
     bcrypt.compare(senha, user.seCad, (err, data) => {
       if (err) throw err;
@@ -136,10 +128,8 @@ app.post("/validationUser", async (req, res) => {
         text: `Solicitação para a mudança de senha`,
       })
       .then((response) => {
-        console.log(response);
       })
       .catch((err) => {
-        console.log("This is error: " + err);
       });
 
     res.send({
@@ -181,13 +171,11 @@ app.post("/change", async (req, res) => {
             text: `Alteração da senha`,
           })
           .then((response) => {
-            console.log(response);
             res.send({
               mensage: `Senha modificada com sucesso!`,
             });
           })
           .catch((err) => {
-            console.log("This is error: " + err);
           });
       });
     }
@@ -201,7 +189,6 @@ app.get("/loadMat/:id", async (req, res) => {
       idUser: req.params.id,
     },
   });
-  console.log(seachMatForUser)
 
   for (let index = 0; index < seachMatForUser.length; index++) {
     const matForUser = await Materia.findOne({
@@ -209,7 +196,6 @@ app.get("/loadMat/:id", async (req, res) => {
         idMat: seachMatForUser[index].idMat,
       },
     });
-    console.log(matForUser)
     mats.push(matForUser.matsMat);
   }
 
@@ -270,32 +256,30 @@ app.post("/getreservas", async (req, res) => {
   }
 });
 
-app.post('/modalist', async (req, res) => {
-  await bd.sync()
-  const {day} = req.body
+app.post("/modalist", async (req, res) => {
+  await bd.sync();
+  const { day } = req.body;
 
   const getReservas = await rese.findAll({
     where: {
-      dayRes: day
-    }
-  })
+      dayRes: day,
+    },
+  });
 
   if (getReservas.length === 0) {
     res.send({
-      mensage: 'Não há nehuma reserva de outros professores para hoje'
-    })
-  }
-  else{
+      mensage: "Não há nehuma reserva de outros professores para hoje",
+    });
+  } else {
     res.send({
-      reservas: getReservas
-    })
+      reservas: getReservas,
+    });
   }
-})
+});
 
 app.post("/admget", async (req, res) => {
   await bd.sync();
   const { id } = req.body;
-  console.log(id);
   const reserva = await rese.findOne({
     where: {
       idRes: id,
@@ -329,7 +313,6 @@ app.post("/getReservasByID", async (req, res) => {
     res.send(reserva);
   }
 
-  console.log(reserva);
 });
 
 // NOVA RESERVA
@@ -415,7 +398,6 @@ app.post("/reservas", async (req, res) => {
   const time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const horarios = req.body.timeReserva;
-  console.log(horarios);
   const timeRes = await rese.findOne({
     where: {
       horaResDe: req.body.horaIni,
@@ -424,7 +406,6 @@ app.post("/reservas", async (req, res) => {
     },
   });
   if (timeRes == null) {
-    console.log(req.body);
     const newReserva = await rese
       .create({
         userRes: req.body.user,
@@ -461,7 +442,6 @@ app.post("/reservas", async (req, res) => {
         });
       });
     const reserva = await rese.findAll();
-    console.log(reserva);
   } else {
     res.send({
       mensage:
@@ -498,7 +478,6 @@ app.post("/updateRes", async (req, res) => {
         mensage: "erro",
       });
     });
-  console.log(thisRes);
 });
 
 // DELETAR RESERVA
@@ -528,7 +507,6 @@ app.post("/reservasdel", async (req, res) => {
       mensage: "Nenhuma reserva encontrada",
     });
   }
-  // console.log(delres);
 });
 
 //  TELA DE PERFIL DO USUÁRIO
@@ -599,7 +577,6 @@ app.get("/horario", async (req, res) => {
 
   const reserva = await rese.findAll();
   res.send(reserva);
-  console.table(reserva);
 });
 // =========================== ADICIONANDO CURSOS AO SISTEMA =======================
 app.get("/cursos", async (req, res) => {
@@ -703,61 +680,78 @@ app.post("/delHora", async (req, res) => {
   if (hora) {
     const seachRelacionamento = await relacionamentoReserva.findAll({
       where: {
-        idHora: horario
-      }
-    })
+        idHora: horario,
+      },
+    });
 
-    console.log(seachRelacionamento)
     if (seachRelacionamento.length != 0) {
-      const ids = []
-      const idr = []
+      const ids = [];
+      const idr = [];
       for (let index = 0; index < seachRelacionamento.length; index++) {
-         ids.push(seachRelacionamento[index].idRes)
-         idr.push(seachRelacionamento[index].idRel)
+        ids.push(seachRelacionamento[index].idRes);
+        idr.push(seachRelacionamento[index].idRel);
       }
       if (ids.length != 0) {
         for (let i = 0; i < ids.length; i++) {
           const deletReserva = await rese.findOne({
             where: {
-              idRes: ids[i]
-            }
-          })
-          console.log(`--------------${i}--------------`)
-          console.log(deletReserva)
+              idRes: ids[i],
+            },
+          });
           await deletReserva.destroy().then(async () => {
-            await hora.destroy().then(
-              async () => {
-                for (let index = 0; index < idr.length; index++) {
-                  const deletRelacionamento = await relacionamentoReserva.findOne({
+            await hora.destroy().then(async () => {
+              for (let index = 0; index < idr.length; index++) {
+                const deletRelacionamento = await relacionamentoReserva.findOne(
+                  {
                     where: {
-                      idRel: idr[index]
-                    }
-                  })
-                  if (deletRelacionamento != null) {
-                    await deletRelacionamento.destroy()
+                      idRel: idr[index],
+                    },
                   }
-                }
-                if (i == 1) {
-                  res.send({
-                    mensage: `Horário excluido! Aviso: ${i} reserva foi excluida com sucesso!`
-                  })
-                }
-                else {
-                  res.send({
-                    mensage: `Horário excluido! Aviso: ${i} reservas foram excluidas com sucesso`
-                  })
+                );
+                if (deletRelacionamento != null) {
+                  await deletRelacionamento.destroy();
                 }
               }
-            )
-          })
+              if (i == 1) {
+                res.send({
+                  mensage: `Horário excluido! Aviso: ${i} reserva foi excluida com sucesso!`,
+                });
+              } else {
+                res.send({
+                  mensage: `Horário excluido! Aviso: ${i} reservas foram excluidas com sucesso`,
+                });
+              }
+            });
+          });
         }
       }
-
-    }
-    else {
-      res.send({
-        mensage: 'Horário Excluido com sucesso e sem alterações nas reservas'
-      })
+    } else {
+      await hora.destroy().then(async () => {
+        const seachFromTableRese = await rese.findAll({
+          where: {
+            horaResAte: horario,
+          },
+        });
+        const idss = [];
+        if (seachFromTableRese.length > 0) {
+          for (let index = 0; index < seachFromTableRese.length; index++) {
+            const deletThis = await rese.findOne({
+              where: {
+                idRes: seachFromTableRese[index].idRes,
+              },
+            });
+            await deletThis.destroy();
+          }
+          res.send({
+            mensage: `Horário Excluido com sucesso e com exclusão de ${seachFromTableRese.length} reservas`,
+          });
+        } else {
+          res.send({
+            mensage:
+              "Horário Excluido com sucesso e sem alterações nas reservas",
+          });
+        }
+      });
     }
   }
 });
@@ -792,7 +786,6 @@ app.post("/list", async (req, res) => {
       dayRes: date,
     },
   });
-  console.log(reservaByRoom);
 
   if (reservaByRoom.length === 0) {
     res.send({ mensage: "nenhuma sala encontrada" });
@@ -901,7 +894,6 @@ app.post("/spaceSeach", async (req, res) => {
     },
   });
 
-  console.log(verificarProf)
 
   for (let a = 0; a < verificarProf.length; a++) {
     horariosOcupado.push(verificarProf[a].idHora);
@@ -912,7 +904,6 @@ app.post("/spaceSeach", async (req, res) => {
   var reservado = horarios;
   if (ocupado.length != 0) {
     for (let index = 0; index < ocupado.length; index++) {
-      console.log(horarios.indexOf(ocupado[index]));
       const i = horarios.indexOf(ocupado[index]);
       reservado[i] = "OCUPADO";
     }
@@ -1114,10 +1105,8 @@ app.post("/cad", async (req, res) => {
               text: `Olá ${usuario.nome}, você acaba de ser cadastrado no sistena de gerenciador de espaços Space Manager! \ Aqui está o seu rm: ${usuario.rm}, e a sua senha: ${usuario.senha}. E para fazer login, acesse: http://localhost/Space-Manager/`,
             })
             .then((response) => {
-              console.log(response);
             })
             .catch((err) => {
-              console.log("This is error: " + err);
             });
         });
       } else {
@@ -1130,12 +1119,9 @@ app.post("/cad", async (req, res) => {
   });
   const createRelacionamento = async () => {
     await bd.sync();
-    // console.log(typeForUser)
 
     tableMaterias = await relacionamentoUserMat.findAll();
-    console.log(tableMaterias);
 
-    console.log(usuario.materias);
     const mats = usuario.materias;
 
     createdProfileUser = await Prof.findOne({
