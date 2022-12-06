@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Nov-2022 às 13:07
+-- Tempo de geração: 06-Dez-2022 às 00:54
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -45,9 +45,10 @@ CREATE TABLE `smcads` (
 --
 
 INSERT INTO `smcads` (`idCad`, `namecCad`, `emailCad`, `seCad`, `rmCad`, `teleCad`, `stateCad`, `typeCad`, `createdAt`, `updatedAt`) VALUES
-(1, 'Administração Space Manager', 'spacemanagerGR@gmail.com', '$2b$10$6WYXWBPd.wO.xHC6lhYjyesTN4xg4s6AbpflHZPCV/liEtdXwjFNO', '00000', '(00)00000-0000', 1, 'admin', '2022-11-19 10:20:00', '2022-11-19 10:20:00'),
-(2, 'Gustavo Sales', 'gussales14@gmail.com', '$2b$10$Z2GttEpvRdQuL3ZU6QGoJ.23cYeg7XWwyOhe5QijJycYlzC/5eaDe', '00001', '(11)96185-7981', 1, 'coord', '2022-11-19 10:21:37', '2022-11-19 10:25:07'),
-(3, 'Gustavo', 'gustavosalles2005@outlook.com', '$2b$10$qQksJsZ4Q5eLUpk1SCsUBunTZokvb0Kv2XSQgh2BOLqA9c/6yGdoK', '00002', '(11)96185-7981', 1, 'prof', '2022-11-19 10:22:33', '2022-11-19 10:22:33');
+(1, 'Administrador', 'spacemanagergr@gmail.com', '$2b$10$tH3FpJSfFtHCfX9Rg7ozYebGSXg5wDBavTx4JN4CELuuFBY0xlVma', '0', '(00)00000-0000', 1, 'admin', '2022-12-05 18:35:53', '2022-12-05 18:35:53'),
+(2, 'Professor 01', 'gussales14@gmail.com', '$2b$10$sU5aNsyE7diHoiOsOkha7uZVV7.Dt1WhTeJqGw7af5DCOS4z4ElOa', '00001', '(00)00000-0000', 1, 'prof', '2022-12-05 21:12:53', '2022-12-05 21:12:53'),
+(3, 'Coordenador 01', 'gustavosalles2005@outlook.com', '$2b$10$apGVkGHlXrEeKbN4XrV8s.4b0H5CUylCpECvhYFgya6Q3DLMnBFUm', '00002', '(00)00000-0000', 1, 'coord', '2022-12-05 21:13:17', '2022-12-05 21:13:17'),
+(4, 'Professor 02', 'gustavo.souza418@etec.sp.gov.br', '$2b$10$6LS6rVF69kzMv1XZfKUVA.GZBh0D04vc9EqnN0e4cSViJdZlo5tRK', '00003', '(00)00000-0000', 0, 'prof', '2022-12-05 21:13:47', '2022-12-05 21:13:54');
 
 -- --------------------------------------------------------
 
@@ -60,22 +61,22 @@ CREATE TABLE `smcurs` (
   `curCurs` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `smcurs`
 --
 
 INSERT INTO `smcurs` (`idCurs`, `curCurs`, `createdAt`, `updatedAt`) VALUES
-(9, '1 Informática', '2022-11-19 11:12:01', '2022-11-19 11:12:01'),
-(10, '2 Informática', '2022-11-19 11:12:01', '2022-11-19 11:12:01'),
-(11, '3 Informática', '2022-11-19 11:12:25', '2022-11-19 11:12:25'),
-(12, '1 Administração', '2022-11-19 11:12:25', '2022-11-19 11:12:25'),
-(13, '2 Administração', '2022-11-19 11:12:42', '2022-11-19 11:12:42'),
-(14, '3 Administração', '2022-11-19 11:12:42', '2022-11-19 11:12:42'),
-(15, '1 Contabilidade', '2022-11-19 11:12:57', '2022-11-19 11:12:57'),
-(16, '2 Contabilidade', '2022-11-19 11:12:57', '2022-11-19 11:12:57'),
-(17, '3 Contabilidade', '2022-11-19 11:13:45', '2022-11-19 11:13:45');
+(1, '1 ano de Informática para Internet', '2022-12-05 19:55:11', '2022-12-05 19:55:11'),
+(2, '2 ano de Informática para Internet', '2022-12-05 19:55:20', '2022-12-05 19:55:20'),
+(3, '3 ano de Informática para Internet', '2022-12-05 19:55:27', '2022-12-05 19:55:27'),
+(4, '1 ano de Contabilidade', '2022-12-05 19:55:38', '2022-12-05 19:55:38'),
+(5, '2 ano de Contabilidade', '2022-12-05 19:55:43', '2022-12-05 19:55:43'),
+(6, '3 ano de Contabilidade', '2022-12-05 19:55:48', '2022-12-05 19:55:48'),
+(7, '1 ano de Administração', '2022-12-05 19:55:57', '2022-12-05 19:55:57'),
+(8, '2 ano de Administração', '2022-12-05 19:56:06', '2022-12-05 19:56:06'),
+(9, '3 ano de Administração', '2022-12-05 19:56:38', '2022-12-05 19:56:38');
 
 -- --------------------------------------------------------
 
@@ -88,19 +89,21 @@ CREATE TABLE `smespas` (
   `espEspa` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `smespas`
 --
 
 INSERT INTO `smespas` (`idEspa`, `espEspa`, `createdAt`, `updatedAt`) VALUES
-(2, 'Quadra', '2022-10-09 16:28:56', '2022-10-09 16:28:56'),
-(3, 'Auditório', '2022-10-14 15:11:29', '2022-10-14 15:11:29'),
-(4, 'Laboratório 1', '2022-10-14 15:11:45', '2022-10-14 15:11:45'),
-(5, 'Laboratório 2', '2022-10-14 15:11:51', '2022-10-14 15:11:51'),
-(6, 'Laboratório 3', '2022-10-14 15:11:56', '2022-10-14 15:11:56'),
-(7, 'Laboratório 4', '2022-10-14 15:12:01', '2022-10-14 15:12:01');
+(1, 'Laboratório 1', '2022-12-05 20:01:39', '2022-12-05 20:01:39'),
+(2, 'Laboratório 2', '2022-12-05 20:01:44', '2022-12-05 20:01:44'),
+(3, 'Laboratório 3', '2022-12-05 20:01:49', '2022-12-05 20:01:49'),
+(4, 'Laboratório 4', '2022-12-05 20:01:54', '2022-12-05 20:01:54'),
+(5, 'Quadra', '2022-12-05 20:02:06', '2022-12-05 20:02:06'),
+(6, 'Auditório', '2022-12-05 20:02:12', '2022-12-05 20:02:12'),
+(7, 'Sala Maker', '2022-12-05 20:02:18', '2022-12-05 20:02:18'),
+(8, 'Biblioteca', '2022-12-05 20:02:25', '2022-12-05 20:02:25');
 
 -- --------------------------------------------------------
 
@@ -113,19 +116,26 @@ CREATE TABLE `smhoras` (
   `horsHora` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `smhoras`
 --
 
 INSERT INTO `smhoras` (`idHora`, `horsHora`, `createdAt`, `updatedAt`) VALUES
-(1, '7:10', '2022-10-14 15:16:28', '2022-10-14 15:16:28'),
-(2, '8:00', '2022-10-14 15:16:35', '2022-10-14 15:16:35'),
-(3, '8:50', '2022-10-14 15:16:40', '2022-10-14 15:16:40'),
-(4, '9:40', '2022-10-14 15:16:49', '2022-10-14 15:16:49'),
-(5, '10:00', '2022-10-14 15:16:55', '2022-10-14 15:16:55'),
-(6, '10:50', '2022-10-15 18:59:16', '2022-10-15 18:59:16');
+(1, '7:30', '2022-12-05 19:58:19', '2022-12-05 19:58:19'),
+(2, '8:20', '2022-12-05 19:58:24', '2022-12-05 19:58:24'),
+(3, '9:10', '2022-12-05 19:58:30', '2022-12-05 19:58:30'),
+(4, '10:00', '2022-12-05 19:58:36', '2022-12-05 19:58:36'),
+(5, '10:20', '2022-12-05 19:58:42', '2022-12-05 19:58:42'),
+(6, '11:10', '2022-12-05 19:58:46', '2022-12-05 19:58:46'),
+(7, '12:00', '2022-12-05 19:58:52', '2022-12-05 19:58:52'),
+(8, '12:50', '2022-12-05 19:58:57', '2022-12-05 19:58:57'),
+(9, '13:00', '2022-12-05 19:59:03', '2022-12-05 19:59:03'),
+(10, '13:50', '2022-12-05 19:59:11', '2022-12-05 19:59:11'),
+(11, '14:40', '2022-12-05 20:00:11', '2022-12-05 20:00:11'),
+(12, '15:30', '2022-12-05 20:00:16', '2022-12-05 20:00:16'),
+(13, '00:00', '2022-12-05 20:00:24', '2022-12-05 20:00:24');
 
 -- --------------------------------------------------------
 
@@ -138,20 +148,20 @@ CREATE TABLE `smmats` (
   `matsMat` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `smmats`
 --
 
 INSERT INTO `smmats` (`idMat`, `matsMat`, `createdAt`, `updatedAt`) VALUES
-(2, 'Matemática', '2022-10-04 23:17:39', '2022-10-04 23:17:39'),
-(3, 'Língua Portuguesa', '2022-10-04 23:18:08', '2022-10-04 23:18:08'),
-(4, 'Biologia', '2022-10-05 00:05:02', '2022-10-05 00:05:02'),
-(5, 'Quimica', '2022-10-05 00:05:57', '2022-10-05 00:05:57'),
-(6, 'Ingles', '2022-10-09 16:25:43', '2022-10-09 16:25:43'),
-(7, 'Geografia', '2022-10-30 23:51:50', '2022-10-30 23:51:50'),
-(8, 'História', '2022-10-30 23:52:00', '2022-10-30 23:52:00');
+(1, 'Matemática', '2022-12-05 19:57:23', '2022-12-05 19:57:23'),
+(2, 'L. Portuguesa', '2022-12-05 19:57:30', '2022-12-05 19:57:30'),
+(3, 'L. Inglesa', '2022-12-05 19:57:36', '2022-12-05 19:57:36'),
+(4, 'Química', '2022-12-05 19:57:45', '2022-12-05 19:57:45'),
+(5, 'Física', '2022-12-05 19:57:51', '2022-12-05 19:57:51'),
+(6, 'Desenvolvimento de Tcc', '2022-12-05 19:58:01', '2022-12-05 19:58:01'),
+(7, 'Sistemas Web II', '2022-12-05 19:58:14', '2022-12-05 19:58:14');
 
 -- --------------------------------------------------------
 
@@ -175,14 +185,20 @@ CREATE TABLE `smrelacionamentoreservas` (
 --
 
 INSERT INTO `smrelacionamentoreservas` (`idRel`, `idHora`, `idRes`, `espRes`, `dayRes`, `idUser`, `createdAt`, `updatedAt`) VALUES
-(1, '7:10', '1', 'Quadra', 'Novembro 25, 2022', 2, '2022-11-22 21:03:14', '2022-11-22 21:03:14'),
-(2, '8:00', '1', 'Quadra', 'Novembro 25, 2022', 2, '2022-11-22 21:03:14', '2022-11-22 21:03:14'),
-(3, '8:50', '2', 'Auditório', 'Novembro 25, 2022', 2, '2022-11-22 21:03:34', '2022-11-22 21:03:34'),
-(4, '9:40', '3', 'Quadra', 'Novembro 25, 2022', 2, '2022-11-22 21:03:59', '2022-11-22 21:03:59'),
-(5, '10:00', '4', 'Quadra', 'Novembro 25, 2022', 3, '2022-11-22 21:04:20', '2022-11-22 21:04:20'),
-(6, '7:10', '5', 'Laboratório 1', 'Novembro 25, 2022', 3, '2022-11-22 21:05:00', '2022-11-22 21:05:00'),
-(7, '8:00', '5', 'Laboratório 1', 'Novembro 25, 2022', 3, '2022-11-22 21:05:00', '2022-11-22 21:05:00'),
-(8, '8:50', '5', 'Laboratório 1', 'Novembro 25, 2022', 3, '2022-11-22 21:05:00', '2022-11-22 21:05:00');
+(1, '7:30', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(2, '8:20', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(3, '10:00', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(4, '9:10', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(5, '10:20', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(6, '11:10', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(7, '12:00', '1', 'Auditório', 'December 08, 2022', 2, '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(9, '8:20', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07'),
+(10, '7:30', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07'),
+(11, '9:10', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07'),
+(12, '10:20', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07'),
+(13, '10:00', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07'),
+(14, '11:10', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07'),
+(15, '12:00', '3', 'Auditório', 'December 09, 2022', 3, '2022-12-05 23:51:07', '2022-12-05 23:51:07');
 
 -- --------------------------------------------------------
 
@@ -203,11 +219,10 @@ CREATE TABLE `smrelacionamentousermats` (
 --
 
 INSERT INTO `smrelacionamentousermats` (`idRel`, `idMat`, `idUser`, `createdAt`, `updatedAt`) VALUES
-(4, '4', '6', '2022-11-06 13:17:10', '2022-11-06 13:17:10'),
-(5, '5', '6', '2022-11-06 13:17:10', '2022-11-06 13:17:10'),
-(6, '5', '3', '2022-11-19 10:22:33', '2022-11-19 10:22:33'),
-(7, '8', '3', '2022-11-19 10:22:33', '2022-11-19 10:22:33'),
-(8, '4', '3', '2022-11-19 10:22:33', '2022-11-19 10:22:33');
+(1, '7', '2', '2022-12-05 21:12:53', '2022-12-05 21:12:53'),
+(2, '6', '2', '2022-12-05 21:12:53', '2022-12-05 21:12:53'),
+(3, '1', '4', '2022-12-05 21:13:47', '2022-12-05 21:13:47'),
+(4, '5', '4', '2022-12-05 21:13:47', '2022-12-05 21:13:47');
 
 -- --------------------------------------------------------
 
@@ -236,11 +251,8 @@ CREATE TABLE `smres` (
 --
 
 INSERT INTO `smres` (`idRes`, `userRes`, `curRes`, `matRes`, `dayRes`, `horaResDe`, `horaResAte`, `espaRes`, `descriRes`, `estaRes`, `horSolicRes`, `createdAt`, `updatedAt`) VALUES
-(1, 'Gustavo Sales', '1 Informática', 'Biologia', 'Novembro 25, 2022', '7:10', '8:50', 'Quadra', 'baaaaaaaaaaaah', 'yellow', '18:3:14', '2022-11-22 21:03:14', '2022-11-22 21:03:14'),
-(2, 'Gustavo Sales', '1 Informática', 'Língua Portuguesa', 'Novembro 25, 2022', '8:50', '9:40', 'Auditório', 'aaaaaaaaaaaaaaaaa', 'yellow', '18:3:34', '2022-11-22 21:03:34', '2022-11-22 21:03:34'),
-(3, 'Gustavo Sales', '2 Informática', 'Matemática', 'Novembro 25, 2022', '9:40', '10:00', 'Quadra', 'aaaaaaaaaaaaaaaaaaaaaaaa', 'yellow', '18:3:59', '2022-11-22 21:03:59', '2022-11-22 21:03:59'),
-(4, 'Gustavo', '2 Informática', 'História', 'Novembro 25, 2022', '10:00', '10:50', 'Quadra', 'aaaaaaaaaaaaaaaaaaaaaa', 'yellow', '18:4:20', '2022-11-22 21:04:20', '2022-11-22 21:04:20'),
-(5, 'Gustavo', '2 Informática', 'Biologia', 'Novembro 25, 2022', '7:10', '9:40', 'Laboratório 1', 'aaaaaaaaaaaaaaaaaaaaaaaa', 'yellow', '18:5:0', '2022-11-22 21:05:00', '2022-11-22 21:05:00');
+(1, 'Professor 01', '3 ano de Informática para Internet', 'Desenvolvimento de Tcc', 'December 08, 2022', '7:30', '12:50', 'Auditório', 'Apresentação do Trabalho de Conclusão de Curso', 'yellow', '18:16:57', '2022-12-05 21:16:57', '2022-12-05 21:16:57'),
+(3, 'Coordenador 01', '3 ano de Administração', 'Desenvolvimento de Tcc', 'December 09, 2022', '7:30', '12:50', 'Auditório', 'Apresentação dos Trabalhos de Conclusão de Curso da turma de 3 administração', 'yellow', '20:51:7', '2022-12-05 23:51:07', '2022-12-05 23:51:07');
 
 --
 -- Índices para tabelas despejadas
@@ -302,49 +314,49 @@ ALTER TABLE `smres`
 -- AUTO_INCREMENT de tabela `smcads`
 --
 ALTER TABLE `smcads`
-  MODIFY `idCad` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCad` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `smcurs`
 --
 ALTER TABLE `smcurs`
-  MODIFY `idCurs` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idCurs` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `smespas`
 --
 ALTER TABLE `smespas`
-  MODIFY `idEspa` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idEspa` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `smhoras`
 --
 ALTER TABLE `smhoras`
-  MODIFY `idHora` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idHora` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `smmats`
 --
 ALTER TABLE `smmats`
-  MODIFY `idMat` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idMat` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `smrelacionamentoreservas`
 --
 ALTER TABLE `smrelacionamentoreservas`
-  MODIFY `idRel` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idRel` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `smrelacionamentousermats`
 --
 ALTER TABLE `smrelacionamentousermats`
-  MODIFY `idRel` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idRel` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `smres`
 --
 ALTER TABLE `smres`
-  MODIFY `idRes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idRes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
