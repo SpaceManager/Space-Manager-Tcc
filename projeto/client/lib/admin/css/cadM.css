@@ -26,6 +26,7 @@ body{
 }
 .mainContainer{
     margin: 0 auto;
+    margin-top: 25px;
     width: 300px;
     height: 600px;
     border-radius: 13px;

@@ -168,7 +168,7 @@ const cadmat = async (infoUser) => {
       ".mainContainer"
     ).innerHTML = `<h2 class="titleProfile">Cadastrar Matérias</h2><br> <div class="list"><ul class="list-group"></ul></div> <div class="controllers">
     <button type="submit" id="saveButton" class="saveBtn" onclick="cadastrar()"><i class="fa-solid fa-floppy-disk"></i></button>
-    <button id="cancelButton"><i class="fa-solid fa-xmark"></i></button>
+    <button id="cancelButton" onclick="location.reload()"><i class="fa-solid fa-xmark"></i></button>
   </div>`;
 
     for (let index = 0; index < resp.length; index++) {
@@ -230,5 +230,5 @@ const cadastrar = async () => {
     location.href = "professores.html";
   } else {
     alert(data.mensage);
-  }
+  } 
 };

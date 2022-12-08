@@ -31,8 +31,7 @@
 </head>
 
 <body onload="authen()">
-
-  <header>
+<header>
     <h1><b>Space Manager</b></h1>
     <div class="profilePIC navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#userModal">
       <i class="fa-solid fa-bars"></i>
@@ -79,7 +78,7 @@
     <input type="tel" placeholder="(00) 0000-0000" id="numProfile">
     <div class="controllers">
       <button type="submit" id="saveButton" onclick="gerarPass()"><i class="fa-solid fa-floppy-disk"></i></button>
-      <button id="cancelButton"><i class="fa-solid fa-xmark"></i></button>
+      <button id="cancelButton" onclick="location.reload()"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
 

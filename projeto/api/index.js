@@ -123,7 +123,7 @@ app.post("/validationUser", async (req, res) => {
       <h1>Olá ${user.namecCad}!</h1>
       <h3>Recebemos as ${timeSoli} uma solicitação para a alteração de sua senha no nosso sistema</h3>
         <h3>Clique no link abaixo para realizar a alteração de sua senha</h3>
-        <h3><a href="http://localhost/Space-Manager/assets/html/changePass/changePass.html?user=${user.idCad}">Trocar senha</a></h3>
+        <h3><a href="http://127.0.0.1:5500/client/assets/html/changePass/changePass.html?user=${user.idCad}">Trocar senha</a></h3>
         `,
         text: `Solicitação para a mudança de senha`,
       })
